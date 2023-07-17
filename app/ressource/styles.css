@@ -1,0 +1,48 @@
+.vide {
+    height: 62px;
+}
+
+.screen {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 500px;
+    aspect-ratio: 10/14;
+    position: relative;
+    overflow: hidden;
+}
+
+.card .background {
+    width : 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+}
+.card .grille {
+    width: 100%;
+    height: 100%;
+    background-size: 100% 1%;
+    background-repeat: repeat;
+    background-image: linear-gradient(#0066ff33, #0066ff33 3px , transparent 3px, transparent 9px  );
+    position: absolute;
+    z-index: 4;
+    animation: grilleMove 22s infinite linear;
+}
+
+@keyframes grilleMove {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 0% -100%;
+    }
+    
+}

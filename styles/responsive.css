@@ -1,0 +1,236 @@
+@media (max-width : 512px) {
+    .logo-cadre div {
+        width: 100px;
+    }
+
+    #presentation {
+        padding: 0 16px;
+    }
+
+    #presentation p {
+        font-size: 16px;
+    }
+
+    #presentation .modele {
+        height: 425px;
+        border-radius: 15px;
+    }
+
+    #about .image-parallax {
+        height: 281px;
+        width: 100%;
+    }
+
+    #about .image-parallax .img-fixed {
+        width: 36vw;
+        height: 46vw;
+        left: 7vw;
+    }
+
+    #about .image-parallax .img-parallax {
+        width: 58vw;
+        height: 68vw;
+        right: 6vw;
+        border-radius: var(--border-radius-15);
+    }
+
+    #application .display {
+        flex-wrap: wrap;
+        padding: 0 16px;
+        flex-direction: column-reverse;
+    }
+
+    #application .display .desc {
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+    }
+
+    #application .desc .content {
+        width: 100%;
+        height: auto;
+        padding-top: 32px;
+    }
+    #metier .arrange {
+        flex-wrap: wrap;
+    }
+
+    #metier .section {
+        width: 100%;
+        height: 500px;
+        padding: 10vw;
+    }
+}
+@media (max-width : 768px) {
+    .logo-cadre div {
+        width: 100px;
+    }
+    .diapo {
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .diapo .centre {
+        width: 66vw;
+        height: 70vh;
+    }
+
+    #presentation {
+        padding: 0 16px;
+    }
+
+    #presentation p {
+        font-size: 16px;
+    }
+
+    #presentation .modele {
+        height: 425px;
+        border-radius: 15px;
+    }
+
+    #about .top {
+        height: 100vh;
+    }
+
+    #about .image-parallax {
+        height: 281px;
+        width: 100%;
+    }
+
+    #about .image-parallax .img-fixed {
+        width: 36vw;
+        height: 46vw;
+        left: 7vw;
+    }
+
+    #about .image-parallax .img-parallax {
+        width: 58vw;
+        height: 68vw;
+        right: 6vw;
+        border-radius: var(--border-radius-15);
+    }
+
+    #application .display {
+        flex-wrap: wrap;
+        padding: 0 16px;
+        flex-direction: column-reverse;
+    }
+    #application .display.reserved {
+        flex-wrap: wrap;
+        padding: 0 16px;
+        flex-direction: column;
+    }
+    #application .display .desc {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        justify-content: flex-start;
+    }
+
+
+    #application .desc .content {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        padding-top: 32px;
+    }
+
+    #application .display .affiche {
+        width: 109%;
+        height: 90vw;
+        position: relative;
+        left: -16px;
+    }
+    #application .affiche .slide {
+        display: none;
+    }
+
+    #application .content .item .image {
+        display: flex;
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 12px;
+    }
+
+    #metier .arrange {
+        flex-wrap: wrap;
+    }
+    #metier .first1 {
+        width: 100%;
+        height: 600px;
+        padding: 10vw;
+        color: white;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    #metier .first1 + .first1 {
+        margin-top: 24px;
+    }
+
+    #metier .section {
+        width: 100%;
+        height: 500px;
+        padding: 10vw;
+    }
+
+    #metier .section+.section {
+        margin-left: 0;
+        margin-top: 24px;
+    }
+
+    .info_section .col-md-4 {
+        text-align: center;
+    }
+
+    .nav-overlay .cover.open {
+        width: 25%;
+        background-color: transparent;
+    }
+
+    .question {
+        width: 100%;
+    }
+    .diapo .proxi {
+        display: none;
+    }
+
+    .nav-overlay[data-visible = 'true'] .cover {
+        width: 20vw;
+    }
+
+    .principeImage {
+        position: relative;
+        bottom: -50px;
+        right: 0;
+        margin-top: 12px;
+    }
+
+    .principeText {
+        font-size: 18px;
+    }
+
+    .principeTextImage {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .cote {
+        width: 40%;
+    }
+    .Cadre {
+        padding: 16px;
+    }
+
+    .tree {
+        width : 50px ;
+    }
+
+    .element {
+        min-height: 250px;
+        height : auto;
+        font-size: 18px;
+    }
+}
