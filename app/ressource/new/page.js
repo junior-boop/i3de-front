@@ -89,7 +89,6 @@ export default function NewRessource() {
 
     useEffect(() => {
         if(images.length > 0 && images.length === base64.length){
-            console.log(true)
            if(titre.length !== 0 && description.length !== 0 && categorie.length !== 0){
             let publication = {
                 images : JSON.stringify(images), 
@@ -127,7 +126,6 @@ export default function NewRessource() {
 
     return (
         <>
-            <div className="vide"></div>
             <section id='newRessource'>
                 <div style={{borderBottom : "1px solid #f1f1f1", marginBottom : 12}}>
                     <Container style={{height : 137, borderBotttom : "1px solid silver"}} cName=" align-items-center">

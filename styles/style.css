@@ -3373,3 +3373,12 @@ background-color: #f1f1f1;
     height: 38px;
     
 }
+.avatar > .name{
+    border-radius: 7px;
+    
+}
+
+
+a {
+    text-decoration: none;
+}

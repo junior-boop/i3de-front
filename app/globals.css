@@ -7,3 +7,7 @@ img {
     max-width: none;
     height: max-content;
 }
+
+.card-ressource {
+    @apply h-[80vmin] border border-gray-200
+}

@@ -132,16 +132,29 @@ export function QuillEscape(props) {
   )
 }
 
-
-export function QuillChevronRight(props) {
+export function OouiUserAvatar(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m12 26l10-10L12 6"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" {...props}><path fill="currentColor" d="M10 11c-5.92 0-8 3-8 5v3h16v-3c0-2-2.08-5-8-5z"></path><circle cx="10" cy="5.5" r="4.5" fill="currentColor"></circle></svg>
   )
 }
 
 
-export function OouiUserAvatar(props) {
+export function QuillArrowLeft(props) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20" {...props}><path fill="currentColor" d="M10 11c-5.92 0-8 3-8 5v3h16v-3c0-2-2.08-5-8-5z"></path><circle cx="10" cy="5.5" r="4.5" fill="currentColor"></circle></svg>
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M6 16h21M13 8l-8 8l8 8"></path></svg>
+  )
+}
+
+
+export function QuillChevronLeft(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M20 6L10 16l10 10"></path></svg>
+  )
+}
+
+
+export function QuillChevronRight(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="m12 26l10-10L12 6"></path></svg>
   )
 }

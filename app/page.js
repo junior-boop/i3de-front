@@ -19,7 +19,7 @@ export default function Home() {
         
         <title>I3DE </title>
       </Head>
-      <div className='vide'></div>
+      
       <Header />
       <Mission />
       <Beneficiaire />

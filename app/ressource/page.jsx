@@ -42,7 +42,6 @@ export default function Ressource(){
     
     return(
         <div>
-            <div className="vide"></div>
             <Bannier_second name={'Ressources'} style={{display : 'flex', alignItems : 'center'}}>
                 <div className="outils_creation_ressource">
                     <Link href={'/ressource/new'}>
@@ -125,7 +124,7 @@ export function ImageItem({data, onClick, id}){
     }, [like])
 
     return(
-        <div className="ImageItem" onClick={onClick}>
+        <div className="ImageItem" >
             <div className="col-12 p-0 image" style={{ cursor : 'pointer', position : 'relative', overflow : 'hidden'}}>
                 <img src={imagesFormated[0].image} width={'100%'}  alt = {'imagegroup'} />  
                 <div className="little_menu">
@@ -136,14 +135,14 @@ export function ImageItem({data, onClick, id}){
                     {like} Like
                 </div>
             </div> 
-            <div className="descrition">
+            <Link href={`/ressource/${id}`} className="descrition">
                 <div className="title">
                     {titre}
                 </div>
                 <div className="icon">
                     <MdiShare style = {{ width : 24, hieght : 24}} />
                 </div>
-            </div>  
+            </Link>  
         </div>
     )
 }

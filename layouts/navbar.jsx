@@ -59,7 +59,7 @@ export default function NavBar(){
                                     <Link  href = '/profils'>
                                         <div className="avatar">
                                             <div>
-                                                {/* <span className="font-semibold">{userInfos.surname.split(' ')[0]} {userInfos.name.split(' ')[0]}</span> */}
+                                                <span className="font-bold"><b>{surname} {name}</b></span>
                                             </div>
                                             <div className="icon rounded-full aspect-square bg-special items-center justify-center">
                                                 <OouiUserAvatar className = "text-white w-7" />
@@ -120,10 +120,9 @@ export default function NavBar(){
     
 
     useEffect(() => {
-        if(userInfos !== null){
-            console.log(userInfos.surname)
-            // setSurname(userInfos.surname.split(' ')[0])
-            // setName(userInfos.name.split(' ')[0])
+        if(userInfos.hasOwnProperty("surname")){
+            setSurname(userInfos.surname.split(' ')[0])
+            setName(userInfos.name.split(' ')[0])
         }
     }, [userInfos])
 
@@ -184,12 +183,11 @@ export default function NavBar(){
                                             </button>
                                         )
                                         : (<div>
-                                            <Link  href = '/profils'>
-                                                <div className="avatar bg-special px-5 flex-col py-3">
-                                                    <div className="name">
-                                                        <span className="font-semibold">{surname} {name}</span>
+                                            <Link className="mt-3"  href = '/profils'>
+                                                <div className="avatar bg-special px-5 flex-col py-3 rounded-[7px]">
+                                                    <div className="name text-white font-bold">
+                                                        <span className="font-semibold"><b>{surname} {name}</b></span>
                                                     </div>
-                                                
                                                 </div>
                                             </Link>
                                         </div>)

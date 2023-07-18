@@ -88,6 +88,7 @@ export default function RootLayout({ children }) {
         }}>
       <body className={inter.className}>
         <NavBar/>
+        <div className='vide'></div>
         {children}
         <footer className={styles.footer}></footer>
         <Footer />
