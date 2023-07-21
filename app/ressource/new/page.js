@@ -10,9 +10,10 @@ import generated_ID from "../id_gen";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import {collection, getDoc, addDoc, setDoc, doc, Timestamp} from 'firebase/firestore'
 import { useRouter } from "next/navigation";
-import { IcBaselineAddPhotoAlternate, MaterialSymbolsCloseRounded } from "@/composants/icons";
-import Global_context from "@/context/global_context";
+import { IcBaselineAddPhotoAlternate, MaterialSymbolsCloseRounded, QuillLoadingSpin } from "@/composants/icons";
+import Global_context, { useGlobalContext } from "@/context/global_context";
 import Titre from "@/composants/titre";
+import moment from "moment/moment";
 
 export default function NewRessource() {
     const [base64, setBase64] = useState([]);
@@ -21,12 +22,13 @@ export default function NewRessource() {
     const [description, setDescription] = useState('')
     const [categorie, setCategorie] = useState('')
     const [count, setCount] = useState(0)
-    const [save, setSave] = useState(true)
+    const [save, setSave] = useState(false)
+    const [btn_name, setBtn_name] = useState('Publier')
 
-    const { Storages, Database } = useContext(Global_context)
+    const { Storages, Database, USERLOGININFO } = useContext(Global_context)
     const Route = useRouter()
 
-
+    const [userInfos, setUserInfos] = USERLOGININFO
     
     const handleInputChange = ({ target }) => {
 
@@ -52,6 +54,7 @@ export default function NewRessource() {
     };
 
     const HandleSubmit =() => {
+        setSave(true)
         if (Storages !== null) {
          base64.map(async (el) => {
                 const imageRef = ref(Storages, `images/${el.name + Date.now()}`)
@@ -95,7 +98,11 @@ export default function NewRessource() {
                 titre : titre,
                 description : description, 
                 createdAt : Timestamp.fromDate(new Date()),
-                createdBy : '',
+                createdBy : {
+                    name : userInfos.name,
+                    surname : userInfos.surname,
+                    user_id : userInfos.id
+                },
                 categorie : categorie,
                 like : [""],
                 share : [""],
@@ -105,13 +112,11 @@ export default function NewRessource() {
             if(Database !== null){
                 const realisationRef = collection(Database, "realisations")
                 AddRealisation(doc(realisationRef), publication).then(() => {
-                   if(typeof window !== 'undefined'){
-                        location.pathname = '/ressource'
-                   }
+                   setSave(true)
                 })
             }
            } else {
-            alert("remplisser les donnees")
+            alert("Remplissez tous les champs avant de sauvegader")
            }
         }
     }, [images])
@@ -123,6 +128,20 @@ export default function NewRessource() {
     useEffect(() => {
         base64.length !== 0 ? base64 : []
     }, [base64, save])
+
+    useEffect(() => {
+        if(save){
+            setBtn_name("Enregistrement...")
+            setTimeout(() => {
+                setSave(false)
+                setBtn_name("Enregisté")
+                setTimeout(() => {
+                    Route.back()
+                }, 1000)
+            }, 3000)
+    
+        }
+    }, [save])
 
     return (
         <>
@@ -169,17 +188,22 @@ export default function NewRessource() {
                             <div className="details">
                                 <div className="champ">
                                     <span>Auteur</span>
-                                    <span>Daniel Seppo Eke</span>
+                                    <span>{userInfos.surname.split(' ')[0]} {userInfos.name}</span>
                                 </div>
                                 <div className="champ">
                                     <span>Date</span>
-                                    <span> 21 Mars 2023</span>
+                                    <span>{moment().format('DD MMMM YYYY')}</span>
                                 </div>
                             </div>
                         </div>
                         <div className="btn_publier">
-                            <button onClick={HandleSubmit}>
-                                Publier
+                            <button onClick={HandleSubmit} className="gap-3">
+                                {
+                                    save
+                                    ? <QuillLoadingSpin className = "w-6 h-6 loader" />
+                                    : null
+                                }
+                                {btn_name}
                             </button>
                         </div>
                     </div>

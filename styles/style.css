@@ -2372,6 +2372,7 @@ background-color: #f1f1f1;
 
 .cible .right .ligne .images img {
     width: 57%;
+    height: fit-content;
     position: absolute;
     bottom: 0;
 }
@@ -2574,6 +2575,7 @@ background-color: #f1f1f1;
 
 .pilier .pilier_content .imageSlider_parent .imageSlider_content .imageSlider_child img {
     width: 80%;
+    height: auto;
     aspect-ratio: 1;
     object-fit: cover;
     object-position: 0% center;
@@ -3381,4 +3383,15 @@ background-color: #f1f1f1;
 
 a {
     text-decoration: none;
+}
+
+.loader {
+    transform: rotate(0);
+    animation: loader 1s normal  infinite  linear;
+}
+
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -5,9 +5,46 @@
 
 img {
     max-width: none;
-    height: max-content;
+    height: 100%;
 }
 
 .card-ressource {
     @apply h-[80vmin] border border-gray-200
+}
+
+
+.contenu p {
+    @apply text-gray-500 text-xl mb-5 text-justify
+}
+.contenu h1 {
+    @apply text-gray-800 mb-7
+}
+.contenu h2 {
+    @apply text-gray-800 mb-7
+}
+.contenu h3 {
+    @apply text-gray-800 mb-7
+}
+.contenu h4 {
+    @apply text-gray-800 mb-7
+}
+
+.contenu > div:has(img){
+    @apply w-full h-auto  overflow-hidden 
+} 
+.contenu > span.legende{
+    @apply block text-center w-[80%] mt-3 mx-auto mb-6
+} 
+
+.contenu q {
+    @apply text-3xl w-[80%] text-center mx-auto block italic
+}
+
+
+.contenu img {
+    @apply w-full rounded-md object-cover
+}
+.contenu ul li {
+    list-style-type:disc ;
+    @apply text-xl
 }

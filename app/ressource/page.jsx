@@ -72,15 +72,7 @@ export default function Ressource(){
                             <ListElement titre = 'Quelques exemples' />
                         </div>
 
-                        <div className="user">
-                        <h5 style = {{marginBottom : 12}}>Mon Compte</h5>
-                            <div>
-                                <ListElement titre = 'Actions' />
-                                <ListElement titre = 'Préferences'/>
-                                <ListElement titre = 'Réalisations' />
-                            </div>
-
-                        </div>
+                        
 
                     </div>
                     <div className="column">

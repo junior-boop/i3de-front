@@ -158,3 +158,10 @@ export function QuillChevronRight(props) {
     <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="m12 26l10-10L12 6"></path></svg>
   )
 }
+
+
+export function QuillLoadingSpin(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 32 32" {...props}><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M22.5 4.742A13 13 0 1 0 29 16"></path></svg>
+  )
+}
