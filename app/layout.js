@@ -9,11 +9,7 @@ import '../styles/style_base.css'
 import styles from '@/styles/style-e.module.css'
 import NavBar from '@/layouts/navbar'
 import Footer from '@/layouts/footer'
-import Global_context from '@/context/global_context'
-
-import {LoginReduce, initialState} from '@/reduce/globalReduce'
-import { useEffect, useReducer, useState, useMemo } from 'react'
-import { IS_LOGIN } from '@/reduce/constante'
+import Global_context_Provider from '@/context/global_context'
 
 export const metadata = {
   title: 'I3DE',
@@ -24,56 +20,19 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
-
-  const [state, dispatch] = useReducer(LoginReduce, initialState)
-
-  const [isLogin, setIsLogin] = useState(false),
-    LOGINCONTEXT = {isLogin, setIsLogin}
-
-
-  const [userInfos, setUserInfos] = useState({}),
-    USERLOGININFO = [userInfos, setUserInfos]
-
-
-
-  // useEffect(() => {
-  //   if(typeof window !== 'undefined') {
-  //       const ls = localStorage 
-  //     const key = 'i3de_login'
-  //     if(ls.getItem(key) === null){
-  //       ls.setItem(key, '')
-  //     }
-  //   }
-  // }, [])
-
-
-
-  const handleReduceLogIn = (data) => {
-    const user =  {
-      login : true,
-      name : data.name,
-      subname : data.subname,
-      uid : data.uid,
-      id : data.id
-    }
-    dispatch({type : IS_LOGIN, payload : user})
-  }
+ 
 
   return (
     <html lang="en">
-      <Global_context.Provider value={{
-          handleReduceLogIn,
-          LOGINCONTEXT,
-          USERLOGININFO
-        }}>
-      <body>
-        <NavBar/>
-        <div className='vide'></div>
-        {children}
-        <footer className={styles.footer}></footer>
-        <Footer />
+      <Global_context_Provider>
+        <body>
+          <NavBar/>
+          <div className='vide'></div>
+          {children}
+          <footer className={styles.footer}></footer>
+          <Footer />
         </body>
-        </Global_context.Provider>
+      </Global_context_Provider>
     </html>
   )
 }
