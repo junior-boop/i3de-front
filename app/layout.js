@@ -1,5 +1,3 @@
-'use client'
-
 import './globals.css'
 import '../styles/bootstrap.css'
 import '../styles/bootstrap-utilities.css'
