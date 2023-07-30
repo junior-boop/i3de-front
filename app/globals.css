@@ -48,3 +48,40 @@ img {
     list-style-type:disc ;
     @apply text-xl
 }
+
+
+.card_team_titre {
+    @apply text-2xl font-semibold mb-2
+}
+.card_team_description {
+    @apply text-xl mb-10 text-gray-700
+}
+
+.card_team_element + .card_team_element {
+    @apply mt-10
+}
+
+.faq_container {
+    @apply w-full
+}
+
+.faq_element {
+    @apply w-full overflow-hidden transition-all duration-300 ease-in-out
+}
+.faq_element + .faq_element {
+    @apply mt-3
+}
+
+.faq_element_question {
+    @apply p-4 text-2xl font-semibold flex justify-between items-center gap-4
+}
+.faq_element_question > button{
+    @apply w-16 h-16 flex items-center justify-center 
+}
+
+.faq_element_repondre {
+    @apply px-4 pb-4 text-xl text-gray-500
+}
+.faq_element_repondre li {
+    @apply text-xl list-disc
+}

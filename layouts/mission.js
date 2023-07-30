@@ -1,5 +1,3 @@
-'use client'
-
 export default function Mission(){
     return (
         <section id='presentation'>

@@ -20,7 +20,7 @@ export default function Actualite (){
             </div>
             <section className="container-fluid bg-clair py-5" style={{ margin : '64px 0'}}>
                 <div className="container">
-                    <Titre titre={"Faire un don maintenant"} />
+                    <Titre titre={"Faire un don maintenant"} className="mx-auto" />
                     <div className="row col-12 col-md-6 m-auto m-sm-0 p-0" style={{gap : 24}}>
                         <div className="col-12 col-md-5 p-0 ">
                             <div className="d-flex bg-special align-items-center p-4 round pay">

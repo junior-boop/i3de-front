@@ -720,6 +720,26 @@ header p {
      text-align: center;
  }
 
+.secteur  .label_desc {
+    padding: 10px 24px;
+    margin: 0 auto 12px;
+    background-color: #C22127;
+    color: white;
+    width: max-content;
+    text-transform: uppercase;
+    border-radius: 5px;
+ }
+.secteur  .titre_desc {
+     font-size: 52px;
+     font-weight: 700;
+     color: black;
+     margin-bottom: 12px;
+     font-family: Comfortaa;
+     text-align: center;
+ }
+
+ 
+
 #presentation .container > .secteur .desc {
     width: 530px;
     min-height: 200px;

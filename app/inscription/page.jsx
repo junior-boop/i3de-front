@@ -5,24 +5,17 @@ import { QuillChevronRight, RiGoogleFill } from "@/composants/icons";
 import { useGlobalContext } from "@/context/global_context";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, doc, setDoc } from "firebase/firestore";
-import generated_ID from "../ressource/id_gen";
+
 
 export default function Login(){
     const [visible, setVisible] = useState(false)
     const [isLoaded, setIsloaded] = useState(false)
 
-    const { googleSignIn, Database, Auth, handleReduceLogIn } = useGlobalContext()
+    const { handleReduceLogIn } = useGlobalContext()
     const router = useRouter()
-    
-
-    const AddRealisation = async (ref, obj) => {
-        return await setDoc(ref, obj, { merge: true })
-    }
      
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault()
         setIsloaded(true)
         const target = e.target
@@ -39,39 +32,46 @@ export default function Login(){
             share : [''],
         }
 
-        const id = generated_ID()+"_"+user.mail
+        try {
+            const reponse = await fetch("/api/inscription/signup", {
+                method : 'POST',
+                body : JSON.stringify(user)
+            })
 
-        createUserWithEmailAndPassword(Auth, user.mail, user.pw)
-        .then(userCredentiel => {
-            console.log(userCredentiel.user)
-            user.accessToken = userCredentiel.user.accessToken
-            user.uid = userCredentiel.user.uid
-            user.toJSON = JSON.stringify(userCredentiel.user.toJSON())
-            user.id = id
-
-            console.log(id)
-            if(Database !== null) {
-                const realisationRef = collection(Database, "users")
-            
-                AddRealisation(doc(Database, "users", id), user).then(() => {
-                    setIsloaded(false)
-                    handleReduceLogIn(user)
-                    // router.back()
-                })
-            }
-        })
-        .catch(error => {
-            console.log(error.code)
-            console.log(error.message)
+            if(reponse.ok) router.back()
+        } catch (error) {
+            console.log(error, 1)
+        } finally {
             setIsloaded(false)
-        })
+        }
     
     }
     
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
+        setIsloaded(true)
+        const target = e.target
 
-        console.log(e)
+
+        const user = {
+            mail : target[0].value,
+            pw : target[1].value,
+        }
+
+
+
+        try {
+            const reponse = await fetch("/api/inscription/login", {
+                method : 'POST',
+                body : JSON.stringify(user)
+            })
+
+            // if(reponse.ok) router.back()
+        } catch (error) {
+            console.log(error, 1)
+        } finally {
+            setIsloaded(false)
+        }
     
     }
 
@@ -103,11 +103,7 @@ export default function Login(){
                                 <h3> en tant que particulier</h3>
                             </div>
                             <SignUp_Space onSubmit={handleSignUp} />
-                            <div className="separation">
-                                <hr />
-                                <span>OU</span>
-                                <hr />
-                            </div>
+                            <div className="separation"><hr /><span>OU</span><hr /></div>
 
                             <div className="login_btn">
                                 <button onClick={handleGoogleSignIn}>

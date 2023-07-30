@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react";
 import Container from "../composants/container";
 import Carousel from 'react-simply-carousel'

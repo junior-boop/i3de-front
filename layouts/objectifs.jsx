@@ -15,10 +15,10 @@ export default function Objectifs() {
                         </div>
                         <div>
                           <Element icon={<CiBuilding style = {{ height : 36, width : 34, color : '#C22127'}} />}> 
-                          Installation de <span style={{color : "var(--bg-color-orange)", fontSize : 20, fontWeight : '600'}}>05 FabLabs</span> d'impression 3D dans <span style={{color : "var(--bg-color-orange)", fontSize : 18, fontWeight : '600'}}>05 écoles</span> d'enseignement technique du cameroun
+                          Installation de <span style={{color : "var(--bg-color-orange)", fontSize : 20, fontWeight : '600'}}>05 FabLabs</span> d{"'"}impression 3D dans <span style={{color : "var(--bg-color-orange)", fontSize : 18, fontWeight : '600'}}>05 écoles</span> d{"'"}enseignement technique du cameroun
                           </Element>
                           <Element icon={<AntDesignDeploymentUnitOutlined style = {{ height : 36, width : 34, color : '#C22127'}} />}> 
-                              Deploiement d'une plateforme de partage de plus de <span style={{color : "var(--bg-color-orange)", fontSize : 20, fontWeight : '600'}}>200</span> ressources (Kits 3D, fiches didactiques)
+                              Deploiement d{"'"}une plateforme de partage de plus de <span style={{color : "var(--bg-color-orange)", fontSize : 20, fontWeight : '600'}}>200</span> ressources (Kits 3D, fiches didactiques)
                           </Element>
                           <Element icon={<ClarityGroupLine style = {{ height : 36, width : 34, color : '#C22127'}} />}> 
                               Renforcement des capacités de <span style={{color : "var(--bg-color-orange)", fontSize : 20, fontWeight : '600'}}>55</span> enseignants (modélisation & impression 3D, gestion du FabLabs)
@@ -51,7 +51,7 @@ export default function Objectifs() {
 
 
 function Point({duree, x, y, list, ville}){
-    const liste = list.map(el => <li>{el}</li>)
+    const liste = list.map((el, key) => <li key={key}>{el}</li>)
     return (
        <div className="point" style={{position : 'absolute', top : `${y}px`, left : `${x}px` }}>
             <div style={{position : 'relative'}}>

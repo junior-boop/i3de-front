@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import Beneficiaire from '@/layouts/beneficaire'
 import Cible from '@/layouts/cible'
@@ -6,20 +6,17 @@ import Header from '@/layouts/header'
 import Mission from '@/layouts/mission'
 import Objectifs from '@/layouts/objectifs'
 import Partenaire from '@/layouts/partenaires'
-import Principal from '@/layouts/principe'
+// import Principal from '@/layouts/principe'
 import Services from '@/layouts/services'
 import Testimony from '@/layouts/temoignage'
-import Head from 'next/head'
-import Image from 'next/image'
+
+import dynamic from 'next/dynamic'
+
+const Principal = dynamic(() => import("@/layouts/principe"), {ssr : false })
 
 export default function Home() {
   return (
-    <div>
-      <Head>
-        
-        <title>I3DE </title>
-      </Head>
-      
+    <div>      
       <Header />
       <Mission />
       <Beneficiaire />

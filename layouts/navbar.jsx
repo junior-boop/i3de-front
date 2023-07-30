@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { OouiUserAvatar, QuillEscape } from "@/composants/icons";
 import { useGlobalContext } from "@/context/global_context";
-import { collection, doc, documentId, runTransaction } from "firebase/firestore";
 
 
 export default function NavBar(){
@@ -19,7 +18,7 @@ export default function NavBar(){
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
 
-    const {LOGINCONTEXT, USERLOGININFO, Database} = useGlobalContext()
+    const {LOGINCONTEXT, USERLOGININFO } = useGlobalContext()
 
     const {isLogin, setIsLogin} = LOGINCONTEXT
     const [userInfos, setUserInfos] = USERLOGININFO
@@ -78,54 +77,6 @@ export default function NavBar(){
         }
     }
 
-
-    useEffect (() => {
-        const key = 'i3de_login'
-        const ls = localStorage || window.localStorage
-
-        if(ls.getItem(key) !== '') {
-            const data = JSON.parse(ls.getItem(key))
-            setIsLogin(data.login)
-            setuserLocalData(data)
-        }
-    }, [])
-
-    useEffect(() => {
-        if(Database !== null){
-            const userRef = doc(Database, 'users', userlocaldata.id)
-
-            
-            console.log(userInfos, userRef, 'bonjour');
-
-            (async function(){
-                try {
-                    const newPopulation = await runTransaction(Database, async (transaction) => {
-                      const sfDoc = await transaction.get(userRef);
-                      if (!sfDoc.exists()) {
-                        throw "Document does not exist!";
-                      }
-                  
-                      const userDoc = sfDoc.data()
-                      setUserInfos(userDoc)
-                      console.log(userDoc)
-                    });
-                    // newPopulation()
-                  } catch (e) {
-                    // This will be a "population is too big" error.
-                    console.error(e);
-                  }
-            })()
-        }
-    }, [isLogin])
-    
-
-    useEffect(() => {
-        if(userInfos.hasOwnProperty("surname")){
-            setSurname(userInfos.surname.split(' ')[0])
-            setName(userInfos.name.split(' ')[0])
-        }
-    }, [userInfos])
-
     
 
     
@@ -169,7 +120,9 @@ export default function NavBar(){
                             <ul>
                                 <li onClick={handleVisibility}><Link href="/">Accueil</Link></li>
                                 <li onClick={handleVisibility}><Link href="/ressource">Ressources</Link></li>
-                                <li onClick={handleVisibility}><Link href="/actualites">Actualités</Link></li>
+                                <li onClick={handleVisibility}><Link href="/blog">Blog</Link></li>
+                                <li onClick={handleVisibility}><Link href="/a_propos">A Propos</Link></li>
+                                <li onClick={handleVisibility}><Link href="/faq">FAQ</Link></li>
                                 <li onClick={handleVisibility}><Link href="/contact-us">Contactez-nous</Link></li>
                                
                                     

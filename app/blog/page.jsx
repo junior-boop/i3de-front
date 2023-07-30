@@ -9,7 +9,7 @@ import Link from "next/link"
 export default function ActualitesRoot(){
     return(
         <div>
-            <Bannier name={'Actualités'} />
+            <Bannier name={'Blog'} />
             <Container>
                 <Titre titre={'Denières nouvelles'} className="font-semibold"/>
                 <div className="grid grid-cols-3 gap-3 mb-10">
@@ -25,7 +25,7 @@ export default function ActualitesRoot(){
                         </button>
                     </div>
                     <div className="flex items-center font-semibold text-xl">
-                        1/1
+                        1 sur 1
                     </div>
                     <div>
                         <button className="w-11 h-11 rounded-full flex items-center justify-center bg-special">
@@ -40,7 +40,7 @@ export default function ActualitesRoot(){
 
 function Article(){
     return (
-        <Link href={'/actualites/1234'} className="w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300">
+        <Link href={'/blog/1234'} className="w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300">
             <div>
                 <div className="w-full aspect-[4/3] overflow-hidden rounded-xl">
                     <img src="/assets/images/photo-19.jpg" alt="" className="w-full h-full object-cover object-center" />

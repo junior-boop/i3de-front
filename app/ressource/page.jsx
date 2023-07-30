@@ -4,8 +4,6 @@ import Container from "@/composants/container"
 import { BxsLike, CiNotification, IcOutlineAdd, MaterialSymbolsCloudDownloadRounded, MdiShare, RiSearchLine } from "@/composants/icons"
 import { useGlobalContext } from "@/context/global_context"
 import { Bannier_second } from "@/layouts/bannier"
-import { collection, getDocs, writeBatch, doc } from "firebase/firestore"
-import Image from "next/image"
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
 
@@ -16,29 +14,11 @@ export default function Ressource(){
     const [openNotification, setOpenNotification] = useState(false)
     const [dataRessource, setDataRessource] = useState([])
 
-    const { Database } = useGlobalContext()
-
     const handleCurrentImage = (id) => {
         setOpen(!open)
         setCurrentImage(id)
     }
 
-    useEffect(() => {
-        if(Database !== null) {
-            const databaseRef = collection(Database, 'realisations/')
-            
-            const ressource = []
-            const getInfos = async () => {
-                const docSnap = await getDocs(databaseRef)
-                const t = docSnap.docs.map(el => {
-                    return {data : el.data(), id : el.id}
-                    
-                })
-                setDataRessource(t)
-            }
-            getInfos()
-        }
-    }, [Database])
     
     return(
         <div>
@@ -91,24 +71,13 @@ export default function Ressource(){
 
 export function ImageItem({data, onClick, id}){
     const { categorie, createdAt, createdBy, images, description, titre, like } = data
-    const { Database } = useGlobalContext()
     const imagesFormated = JSON.parse(images)
 
-    const Batch = writeBatch(Database)
     
 
     const handleLikeBtn = () => {
-        (async function(){
-            const reference = doc(Database, "realisations", id)
-            Batch.update(reference, {"like": like + 1});
-            await Batch.commit()
-            console.log('plus')
-        })()
-    }
-
-   
         
-
+    }
     // 
 
     useEffect(() => {

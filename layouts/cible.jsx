@@ -1,6 +1,5 @@
 import Container from "../composants/container";
 
-
 export default function Cible(){
     return(
         <section className='cible' style={{padding : '150px 0'}} >
@@ -10,7 +9,7 @@ export default function Cible(){
               <div className="cible_label">Notre cible</div>
               <div className="cible_titre">Les avantages de l’impression 3D pour la professionnalisation</div>
               <div className="desc">L’impression et la modélisation 3D permettent de créer des objets tangibles
-                  qui peuvent être manipulés et examinés, ce qui rend l'apprentissage plus interactif et
+                  qui peuvent être manipulés et examinés, ce qui rend l{"'"}apprentissage plus interactif et
                   plus intéressant. Les avantages d’ordre pédagogique sont multiples</div>
               <div className="more">
                 <a href="/">

@@ -188,7 +188,7 @@ export default function NewRessource() {
                             <div className="details">
                                 <div className="champ">
                                     <span>Auteur</span>
-                                    <span>{userInfos.surname.split(' ')[0]} {userInfos.name}</span>
+                                    {/* <span>{userInfos?.surname.split(' ')[0]} {userInfos.name}</span> */}
                                 </div>
                                 <div className="champ">
                                     <span>Date</span>

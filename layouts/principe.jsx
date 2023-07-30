@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Container from "../composants/container";
-import Style from '../styles/style-e.module.css'
-import anime from "animejs";
 import { Controller, Scene } from "scrollmagic";
 
 
@@ -12,7 +10,6 @@ export default function Principal(){
     const pilier = useRef()
 
     useEffect(() => {
-        console.log(pilier.current)
 
         const controller = new Controller()
         const ScenePilier = new Scene({
@@ -26,8 +23,7 @@ export default function Principal(){
             if (event.progress >= 0.25 && event.progress < 0.5 ) {console.log('state 2') ; setScrollState(2)}
             if (event.progress >= 0.5 && event.progress < 0.75 ) {console.log('state 3') ; setScrollState(3)}
             if (event.progress >= 0.75 && event.progress <= 1 ) {console.log('state 4') ; setScrollState(4)}
-            // else setScrollState(1)
-            // console.log(event.progress)
+
         })
 
         ScenePilier.setPin(pilier.current).addTo(controller)
@@ -79,7 +75,7 @@ function ScrollState({scrollstate}){
     }, [scrollstate])
 
     return(
-        <>
+        <div>
             <div data-open = {openObject.ref1} className="champs" style = {{height : openObject.ref1 ? 75 + autoHeight : 72}}>
                 <div className="champs_titre">Renforcement du Capital humain</div>
                 <div ref={refdesc1} className="champs_element">Les Enseignants enroulé dans le projet I3DE pourront créer des kits educatifs adaptés aux besoin des élèves enfin de booster l’assimilation des concepts pratiques, stimuler le sens de l’innovation et de le créativité de ces derniers. L’enseignement et l’apprentissages de certaines matières et concepts seront ainsi simplifiés avec l’utilisation du materiel pedagogique adapté et représentatif des objects enseignés et desormais imprimés en 3D</div>
@@ -100,7 +96,7 @@ function ScrollState({scrollstate}){
                         Création Banque modele 3D + fiches pédagogiques les plus optimales. un réseau de partage sera disponible en ligne et mettra à la disposition de tou les enseignants (Cameroun, Afrique et monde) les ressources les plus utiles et appréciés.</div>
             </div>
 
-        </>
+        </div>
     )
 }
 
@@ -133,18 +129,6 @@ function ImageSlider({scrollstate}){
                 </div>
                 <div></div>
             </div>
-        </div>
-    )
-}
-
-function Element({style, className, title, texte, children}){
-    return(
-        <div className={`Element ${className}`} style={{ padding : 36, borderRadius : 16,...style }}>
-            <div className="Element_first">
-                <div className = 'Element_titre' style={{textTransform : "uppercase", marginBottom : 12}}>{title}</div>
-                <div className= {'Element_text'} >{texte}</div>
-            </div>
-            {children}
         </div>
     )
 }

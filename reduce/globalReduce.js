@@ -11,12 +11,13 @@ export const initialState = {
 
 
 export function LoginReduce(state, action){
-    const ls = localStorage || window.localStorage 
-    const key = 'i3de_login'
+    // if(typeof window !== 'undefined'){
+    //     const ls = localStorage || localStorage 
+    // const key = 'i3de_login'
 
-    if(ls.getItem(key) === null){
-        ls.setItem(key, '')
-    }
+    // if(ls.getItem(key) === null){
+    //     ls.setItem(key, '')
+    // }
 
     switch (action.type) {
         case IS_EMPTY :
@@ -31,11 +32,12 @@ export function LoginReduce(state, action){
                 id : action.payload.id
             }
 
-            ls.setItem(key, JSON.stringify(state))
+            // ls.setItem(key, JSON.stringify(state))
             return state
         case IS_LOGOUT:
             state = initialState
-            ls.removeItem(key)
+            // ls.removeItem(key)
             return state
     }
+    // }
 }
