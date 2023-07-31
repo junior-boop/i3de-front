@@ -152,7 +152,7 @@ export default function NavBar(){
                                 <li onClick={handleVisibility}><Link href="/blog">Blog</Link></li>
                                 <li onClick={handleVisibility}><Link href="/a_propos">A Propos</Link></li>
                                 <li onClick={handleVisibility}><Link href="/faq">FAQ</Link></li>
-                                <li onClick={handleVisibility}><Link href="/contact-us">Contactez-nous</Link></li>
+                                {/* <li onClick={handleVisibility}><Link href="/contact-us">Contactez-nous</Link></li> */}
                                
                                     
                                     {
