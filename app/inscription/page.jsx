@@ -3,7 +3,7 @@
 import Container from "@/composants/container";
 import { QuillChevronRight, RiGoogleFill } from "@/composants/icons";
 import { useGlobalContext } from "@/context/global_context";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 
@@ -11,7 +11,10 @@ export default function Login(){
     const [visible, setVisible] = useState(false)
     const [isLoaded, setIsloaded] = useState(false)
 
-    const { handleReduceLogIn } = useGlobalContext()
+    const { handleReduceLogIn, LOGINCONTEXT, USERLOGININFO } = useGlobalContext()
+    const {isLogin, setIsLogin} = LOGINCONTEXT
+    const [userInfos, setUserInfos] = USERLOGININFO
+
     const router = useRouter()
      
 
@@ -38,7 +41,10 @@ export default function Login(){
                 body : JSON.stringify(user)
             })
 
-            if(reponse.ok) router.back()
+            if(reponse.ok) {
+                console.log(reponse.json())
+                // router.back()
+            }
         } catch (error) {
             console.log(error, 1)
         } finally {
@@ -58,17 +64,22 @@ export default function Login(){
             pw : target[1].value,
         }
 
-
-
         try {
             const reponse = await fetch("/api/inscription/login", {
                 method : 'POST',
                 body : JSON.stringify(user)
             })
 
-            // if(reponse.ok) router.back()
+            if(reponse.ok) {
+                const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
+                handleReduceLogIn({name, surname, mail, _id})
+                setIsloaded(true)
+                setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
+                setIsloaded(false)
+                // router.back()
+            }
         } catch (error) {
-            console.log(error, 1)
+            console.log(error)
         } finally {
             setIsloaded(false)
         }

@@ -17,8 +17,6 @@ export const metadata = {
   // script : "https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"
 }
 
-
-
 export default function RootLayout({ children }) {
  
 

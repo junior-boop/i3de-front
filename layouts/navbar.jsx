@@ -17,8 +17,9 @@ export default function NavBar(){
 
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
+    const [avatarMenu, setAvatarMenu] = useState(false)
 
-    const {LOGINCONTEXT, USERLOGININFO } = useGlobalContext()
+    const {LOGINCONTEXT, USERLOGININFO, handleReduceLogOut } = useGlobalContext()
 
     const {isLogin, setIsLogin} = LOGINCONTEXT
     const [userInfos, setUserInfos] = USERLOGININFO
@@ -36,6 +37,19 @@ export default function NavBar(){
         })
     }, [])
 
+    const getUsetInfos = async () => {
+        const get = await userInfos
+
+        if(get.hasOwnProperty('name')){
+            setName(get.name.split(' ')[0])
+            setSurname(get.surname.split(' ')[0])
+        }
+    }
+
+    useEffect(() => {
+        getUsetInfos()
+        console.log(surname, name)
+    }, [isLogin, userInfos])
 
 
 
@@ -50,21 +64,36 @@ export default function NavBar(){
 
                         {
                             !isLogin
-                            ? (<div><Link  href={'/inscription'}>
-                            <button className="login_btn">S’inscrire</button>
-                        </Link></div>)
+                            ? (<div>
+                                    <Link  href={'/inscription'}>
+                                        <button className="login_btn">S’inscrire</button>
+                                    </Link>
+                                </div>)
                             : (
                                 <div>
-                                    <Link  href = '/profils'>
-                                        <div className="avatar">
-                                            <div>
-                                                <span className="font-bold"><b>{surname} {name}</b></span>
-                                            </div>
-                                            <div className="icon rounded-full aspect-square bg-special items-center justify-center">
+                                    <div className="avatar">
+                                        <div>
+                                            <span className="font-bold"><b>{surname} {name}</b></span>
+                                        </div>
+                                        <div className="relative">
+                                            <button onClick={() => setAvatarMenu(!avatarMenu)} style = {{outline : 'none'}} className="icon rounded-full aspect-square bg-special items-center justify-center w-12 flex items-center justify-center">
                                                 <OouiUserAvatar className = "text-white w-7" />
+                                            </button>
+                                            <div style={{bottom : -132, right : -12,boxShadow : '0 5px 10px -5px #0005', visibility : avatarMenu ? 'visible' : 'hidden', overflow : "hidden", opacity : avatarMenu ? 1 : 0 }} className="absolute p-2 bg-white border border-gray-100 rounded-xl transition-all duration-300">
+                                                <div>
+                                                    <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
+                                                        Mon Compte
+                                                    </Link>
+                                                    <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
+                                                        Mes activités
+                                                    </Link>
+                                                    <button onClick={() => handleReduceLogOut()} className="py-2 px-3 bg-special rounded-lg text-white font-semibold w-full justify-start text-right">
+                                                        Se déconnecter
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 </div>
                             )
                         }
@@ -89,7 +118,7 @@ export default function NavBar(){
                         <img src="/assets/icon/i3de_logo.png" width= {85}  alt="logo i3de" />
                     </div>
                 </div>
-                <div className="icon-right d-flex">
+                <div className="icon-right flex gap-7">
                     {
                         DonVisible()
                     }
@@ -111,13 +140,13 @@ export default function NavBar(){
                                      onClick = {handleVisibility}
                                 >
                                     <div>
-                                     <QuillEscape width = {28} height = {28} />
+                                        <QuillEscape width = {28} height = {28} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <ul>
+                            <ul className="px-2">
                                 <li onClick={handleVisibility}><Link href="/">Accueil</Link></li>
                                 <li onClick={handleVisibility}><Link href="/ressource">Ressources</Link></li>
                                 <li onClick={handleVisibility}><Link href="/blog">Blog</Link></li>
@@ -136,14 +165,18 @@ export default function NavBar(){
                                             </button>
                                         )
                                         : (<div>
-                                            <Link className="mt-3"  href = '/profils'>
-                                                <div className="avatar bg-special px-5 flex-col py-3 rounded-[7px]">
-                                                    <div className="name text-white font-bold">
-                                                        <span className="font-semibold"><b>{surname} {name}</b></span>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        </div>)
+                                                <hr />
+                                                <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
+                                                    Mon Compte
+                                                </Link>
+                                                <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
+                                                    Mes activitéss
+                                                </Link>
+                                                <button style={{width : 'max-content', borderRadius : 7}} className="bg-special px-4 flex-col py-3 rounded-[7px] w-max text-white font-bold">
+                                                        Se déconnecter
+                                                </button>
+                                            </div>
+                                        )
                                     }
                             </ul>
                         </div>

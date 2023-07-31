@@ -22,7 +22,7 @@ nav .logo {
 }
 
 nav .icon-right>* {
-    width: 70px;
+    width: max-content;
     display: flex;
     justify-content: flex-end;
 }
