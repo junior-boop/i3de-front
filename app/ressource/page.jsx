@@ -17,11 +17,11 @@ export default function Ressource(){
                 <div className="ressource">
                     <div className="option">
                         <h3> Recherche </h3>
-                        <InputSearch placeholder={'Rechercher un article'} />
+                            <InputSearch placeholder={'Rechercher une ressource'} />
                         <h5 style = {{marginBottom : 12}}>Filtre</h5>
                         <div>
                             <ListElement titre = 'Tous les éléments' />
-                            <ListElement titre = 'Fiches pédagogique'/>
+                            <ListElement titre = 'Fiches pédagogiques'/>
                             <ListElement titre = 'Modèles 3D' />
                             <ListElement titre = 'Quelques exemples' />
                         </div>
