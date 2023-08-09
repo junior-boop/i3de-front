@@ -1,3 +1,5 @@
+'use client'
+
 import Container from "@/composants/container";
 import { BiFacebook, CarbonToolKit, Iconoir3dSelectFace, IonLogoLinkedin, MaterialSymbolsCall, MaterialSymbolsMailRounded, TeenyiconsCertificateOutline } from "@/composants/icons";
 import Bannier from "@/layouts/bannier";
@@ -7,35 +9,61 @@ export default function Apropos(){
     return(
         <div>
             <Bannier name={"A Propos"} />
-            <section id='presentation'>
+            <section id='presentation' className="h-auto">
                 <div className="container">
                 
                 <div className='secteur'>
                     <div className="image">
-                    <img src="/image_banniere.jpg" alt="" height={'100%'} />
+                        <img src="/Caysti-1744.jpg" className="object-left" alt="" height={'100%'} />
                     </div>
                 </div>
-                <div className='secteur'>
+                <div className='secteur h-auto'>
                     <div className="desc">
                     <div className="mb-10">
-                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">Apprentissage & Professionnalisation</div>
+                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">C'est quoi le projet I3DE ?</div>
                     </div>
-                    <div className="text-xl">
-                    En 2023, nous lançons une phase pilote afin d’évaluer l’impact de l’utilisation de l’impression 3D
-                    sur la qualité des enseignements dans les lycées techniques au Cameroun. Les écoles et les
-                    enseignants qualifiés dans nos technologies d’impression 3D auront la possibilité créer des
-                    modèles, des kits didactiques et des prototypes physiques qui seront utilisés pour expliquer des
-                    concepts complexes, pour démontrer des techniques et même pour équiper à faibles coûts les
-                    laboratoires et salles de travaux pratiques
+                        <div className="text-xl">
+                        Le projet Impression 3D pour l'Éducation (I3DE) vise l’amélioration de la
+                        professionnalisation du processus pédagogique des écoles grâce aux technologies
+                        d’impression 3D.<br/>
+                        L’impression 3D est une technologie robuste, abordable et relativement récente qui permet
+                        la fabricaƟon des objets en plastique peu importe leur complexité. Elle sera exploitée ici par
+                        des enseignants afin de construire des modèles 3D de prototypes à des buts de simulation ou
+                        imprimer des modèles physiques d’objet sujet de cours divers. <br/>
+                        Cette année 05 lycées techniques en bénéficieront de micro-fablabs d’impression 3D. Le
+                        déploiement se déroulera en 03 étapes clés :
 
-                    </div>
+                        <div>
+                            <ul className="my-6">
+                                <li className="text-xl list-disc">
+                                L’installation de l’infrastructure physique des micro-fablabs (Fabrication Laboratory)
+                                d’impression 3D au sein des établissements choisis.
+                                </li>
+                                <li className="text-xl list-disc">
+                                Le renforcement de capacités d’un groupe d’enseignants des établissements du
+                                groupe cible. Les enseignants seront formés et qualifiés à la prise en main des
+                                équipements, la réalisation des dessins numériques 3D simples et complexes à but
+                                didactique.
+                                </li>
+                                <li className="text-xl list-disc">
+                                L’animation continue (suivi - évaluation) à travers le déploiement d’un réseau de
+                                partage et de mutualisation de ressources physiques et virtuelles (objets 3D, modèles
+                                3D et fiches pédagogiques). Pilotée par un point focal formé à cet effet, l’animaƟon
+                                continue est le socle du mécanisme de suivi-évaluation. Elle permettra également
+                                d’accompagner les élèves dans la réalisaton de projets de fin année innovants et
+                                réalistes grâce aux objets 3D imprimés en local.
+                                </li>
+                            </ul>
+                        </div>
+
+                        </div>
                     </div>
                 </div>
                 </div>
             </section>
             <div id="Services">
                 <div className="mb-10 flex items-center justify-center">
-                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-6xl font-bold">Ce que nous Proposons</div>
+                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">Ce que nous Proposons</div>
                 </div>
                 
                 <Container>
@@ -66,7 +94,7 @@ export default function Apropos(){
                                     </div>
                                     <div>
                                         <span className="block text-lg text-gray-500 mb-1">Téléphone</span>
-                                        <span className="block text-2xl text-gray-800 font-semibold">(+237) 655 733 765</span>
+                                        <span className="block text-2xl text-gray-800 font-semibold">(+237) 690 767 619</span>
                                     </div>
                                 </div>
                                 <div className="card_team_element flex gap-6">
@@ -75,7 +103,7 @@ export default function Apropos(){
                                     </div>
                                     <div>
                                         <span className="block text-lg text-gray-500 mb-1">Adresse E-mail</span>
-                                        <span className="block text-2xl text-gray-800 font-semibold">juniorseppo3@gmail.com</span>
+                                        <span className="block text-2xl text-gray-800 font-semibold">arielle.kitio@gmail.com</span>
                                     </div>
                                 </div>
                                 <div className="card_team_element flex gap-6">
@@ -84,16 +112,16 @@ export default function Apropos(){
                                     </div>
                                     <div>
                                         <span className="block text-lg text-gray-500 mb-1">LinkedIn</span>
-                                        <span className="block text-2xl text-gray-800 font-semibold">juniorseppo3@gmail.com</span>
+                                        <span className="block text-2xl text-gray-800 font-semibold">linkedin.com/in/arielle-kitio-tsamo/</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <div className="grid grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         <Resposable name = 'Dr TIOGUEM FRANCK' poste = 'Co-Fondateur' tel={'(+237) 655733765'} mail={'juniorseppo@gmail.com'} linkedin={'linkin.com'} />
-                        <Resposable name = "KONO FRANCOISE" poste = "Assistante projet"/>
+                        <Resposable name = "KONO FRANCOISE" poste = "Assistante projet" tel={'(+237) 693 801 828'} linkedin={'https://www.linkedin.com/in/fran%C3%A7oise-kono-828460196/'}/>
                         <Resposable name = "WADO LEOLIN" poste = "Responsable technique"/>
                         <Resposable name = "BAVOUA RODOLPHE" poste= "Ingénieur en chef" />
                     </div>
@@ -166,3 +194,28 @@ function Service({image, icon, titre, texte, url = "/", button }){
         </div>
     )
 }
+
+
+
+
+const texte =`Le projet Impression 3D pour l'Éducation (I3DE) vise l’amélioration de la
+professionnalisation du processus pédagogique des écoles grâce aux technologies
+d’impression 3D.
+L’impression 3D est une technologie robuste, abordable et relativement récente qui permet
+la fabricaƟon des objets en plastique peu importe leur complexité. Elle sera exploitée ici par
+des enseignants afin de construire des modèles 3D de prototypes à des buts de simulation ou
+imprimer des modèles physiques d’objet sujet de cours divers.
+Cette année 05 lycées techniques en bénéficieront de micro-fablabs d’impression 3D. Le
+déploiement se déroulera en 03 étapes clés :
+ L’installation de l’infrastructure physique des micro-fablabs (Fabrication Laboratory)
+d’impression 3D au sein des établissements choisis.
+ Le renforcement de capacités d’un groupe d’enseignants des établissements du
+groupe cible. Les enseignants seront formés et qualifiés à la prise en main des
+équipements, la réalisation des dessins numériques 3D simples et complexes à but
+didactique.
+ L’animaƟon conƟnue (suivi - évaluation) à travers le déploiement d’un réseau de
+partage et de mutualisation de ressources physiques et virtuelles (objets 3D, modèles
+3D et fiches pédagogiques). Pilotée par un point focal formé à cet effet, l’animaƟon
+continue est le socle du mécanisme de suivi-évaluation. Elle permettra également
+d’accompagner les élèves dans la réalisaton de projets de fin année innovants et
+réalistes grâce aux objets 3D imprimés en local.`

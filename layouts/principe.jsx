@@ -77,7 +77,7 @@ function ScrollState({scrollstate}){
         <div>
             <div data-open = {openObject.ref1} className="champs" style = {{height : openObject.ref1 ? 75 + autoHeight : 72}}>
                 <div className="champs_titre">Renforcement du Capital humain</div>
-                <div ref={refdesc1} className="champs_element">Les Enseignants enroulé dans le projet I3DE pourront créer des kits educatifs adaptés aux besoin des élèves enfin de booster l’assimilation des concepts pratiques, stimuler le sens de l’innovation et de le créativité de ces derniers. L’enseignement et l’apprentissages de certaines matières et concepts seront ainsi simplifiés avec l’utilisation du materiel pedagogique adapté et représentatif des objects enseignés et desormais imprimés en 3D
+                <div ref={refdesc1} className="champs_element">Les Enseignants enroulés dans le projet I3DE pourront créer des kits educatifs adaptés aux besoin de certaines matières et concepts seront ainsi simplifiés avec l’utilisation du materiel pedagogique adapté et représentatif des objects enseignés et desormais imprimés en 3D
                 <div className="imageSlider_child">
                             <img src="/assets/image_1.jpg" alt="image" />
                         </div>
