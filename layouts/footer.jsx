@@ -1,5 +1,8 @@
+"use client"
+
 import Link from "next/link"
 import { BiFacebook, BiLinkedin, BiYoutube } from "../composants/icons"
+import { useState } from "react"
 
 export default function Footer(){
     return (
@@ -51,9 +54,9 @@ export default function Footer(){
                                 <NewsLetter />
                             </li>
                             <li style = {{ display: 'flex', gap : 14 }}>
-                                <BtnSociaux icon={<BiFacebook style = {{ width : 24, height : 24 }} />} url = 'facebook.com' />
-                                <BtnSociaux icon={<BiYoutube style = {{ width : 24, height : 24 }}/>} url = 'facebook.com' />
-                                <BtnSociaux icon={<BiLinkedin style = {{ width : 24, height : 24 }}/>} url = 'facebook.com' />
+                                <BtnSociaux icon={<BiFacebook style = {{ width : 24, height : 24 }} />} url = 'https://web.facebook.com/caysti' />
+                                <BtnSociaux icon={<BiYoutube style = {{ width : 24, height : 24 }}/>} url = 'https://www.youtube.com/@caysti1507' />
+                                <BtnSociaux icon={<BiLinkedin style = {{ width : 24, height : 24 }}/>} url = 'https://www.linkedin.com/company/caysti/' />
                                 
                             </li>
                             
@@ -74,15 +77,37 @@ export default function Footer(){
 
 
 function NewsLetter(){
+    const [mail, setMail] = useState('')
+
+    const handleSave = async () => {
+        const newsLetter = {
+            name : mail,
+        } 
+
+        const  headersList = {
+            "Accept": "*/*",
+            "Content-Type": "application/json"
+           }
+
+        let response = await fetch("/api/newsletter", { 
+            method: "POST",
+            body: JSON.stringify(newsLetter),
+            headers: headersList
+        });
+
+        if(response.ok) {
+           setMail('')
+        }
+    }
     return (
         <div className="newsletter">
-            <input type="email" />
-            <button> Envoyer </button>
+            <input type="email" value={mail} onChange={() => setMail()} />
+            <button onClick={handleSave}> Envoyer </button>
         </div>
     )
 }
 
-function BtnSociaux({url = '/', icon}) {
+function BtnSociaux({url = 'https://', icon}) {
     return(
        <Link href={url}>
             <div className="sociaux" style={{ cursor : 'pointer'}}>

@@ -12,7 +12,7 @@ export default function Partenaire(){
                         <div className="w-100 text-center titre py-5">
                         Partenaires
                         </div>
-                        <div className="partenaire d-flex justify-content-center">
+                        <div className="partenaire flex justify-content-center flex-wrap">
                             <Items url={'https://www.caysti.com/'}>
                                 <img src="./assets/prototype/Logo_caysti.svg" height={'100%'}/>
                             </Items>

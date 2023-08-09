@@ -747,9 +747,8 @@ header p {
 
 #presentation .container > .secteur .desc > .text{
    color : black;
-   font-size: 24px ;
+   font-size: 18px ;
    font-weight: 600;
-   text-align: justify;
 }
 #presentation .container > .secteur .desc .text + .text {
     margin-top: 12px;
@@ -769,6 +768,11 @@ header p {
         width: 100vw;
     }
 
+    #presentation > .secteur {
+        width: 100%;
+        margin: 0 auto 5vmin;
+    }
+
     #presentation .container > .secteur + .secteur {
         margin-top: 76px;
     }
@@ -779,6 +783,10 @@ header p {
         height: auto;
         align-items: center;
         justify-content: center;
+    }
+
+    #presentation  > .secteur  .titre_desc {
+        font-size: 32px;
     }
 
     #presentation .container > .secteur .image {
@@ -801,7 +809,6 @@ header p {
 
     #presentation .container > .secteur .desc .titre_desc {
         font-size: 36px;
-       
     }
 
     #presentation .container > .secteur .desc > .text{
@@ -2400,8 +2407,18 @@ background-color: #f1f1f1;
 .cible .right .ligne .whiteSpace div:last-child{
     flex: 1;
     font-size: 2ch;
-    text-align: justify;
+    /* text-align: justify; */
 }
+
+
+@media (max-width : 1283px) {
+    .cible .right .ligne .whiteSpace div:last-child{
+        flex: 1;
+        font-size: calc(10px + 1.2vmin);
+        /* text-align: justify; */
+    }
+}
+
 
 @media (max-width : 756px) {
     .cible .container {
@@ -2432,7 +2449,9 @@ background-color: #f1f1f1;
 
     .cible .right .ligne div:last-child {
         padding: 0;
-        text-align: justify;
+        font-size: 18px !important;
+        text-align: left;
+        padding: 1rem;
     }
 }
 
@@ -2603,6 +2622,240 @@ background-color: #f1f1f1;
     box-shadow: 0px 4px 23px 0px rgba(0, 0, 0, 0.137);
 }
 
+.champs_element .imageSlider_child {
+    display: none;
+}
+
+@media (max-width : 1282px) {
+    .pilier {
+        padding: 10vmin 0;
+    }
+    
+    .pilier_header {
+        display: block;
+    }
+    
+    .pilier_header .pilier_label {
+        padding: 10px 24px;
+        background-color: #c12227;
+        font-size: 18px;
+        font-family: Montserrat;
+        color: #ffffff;
+        width : max-content;
+        border-radius: 5px;
+        
+    } 
+    
+    .pilier_header div:last-child {
+        width: max-content;
+        margin-bottom: 24px;
+        font-size: 52px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 133%;
+        font-family: Comfortaa;
+    }
+    
+    .pilier .pilier_content {
+        display: flex;
+        /* grid-template-columns: repeat(2, 1fr); */
+        gap : calc(32px + 1.5vmin)
+    }
+    .pilier .pilier_content .champs {
+        overflow: hidden;
+        height: 72px;
+        transition: all .3s ease-in-out;
+    }
+    .pilier .pilier_content .champs * {
+        color: #000;
+        font-family: Montserrat;
+        font-size: calc(10px + .5vmin);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+    }
+    .pilier .pilier_content .champs[data-open = 'false']  {
+        color: #000;
+        font-family: Montserrat;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        height: 48px !important;
+    }
+    
+    .pilier .pilier_content .champs .champs_titre {
+        transition: all .3s ease-in-out;
+    }
+    
+    .pilier .pilier_content .champs[data-open = 'false'] + .champs[data-open = 'true'] {
+        margin-top: 18px ;
+    }
+    .pilier .pilier_content .champs[data-open = 'true'] + .champs[data-open = 'false'] {
+        margin-top: 0px ;
+    }
+    .pilier .pilier_content .champs[data-open = 'false'] + .champs[data-open = 'false'] {
+        margin-top: 0px ;
+    }
+    
+    .pilier .pilier_content .champs[data-open = 'true'] .champs_titre {
+        color: #C22127;
+        font-family: Montserrat;
+        font-size: calc(15px + 1.5vmin);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%;
+        margin-bottom: 16px;
+        width: 90%;
+    }
+    .pilier .pilier_content .champs[data-open = 'false'] .champs_titre {
+        color: #929292;
+        font-family: Montserrat;
+        font-size: calc(15px + 1vmin);
+        font-style: normal;
+        font-weight: 500;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        line-height: 133%;
+        width: 90%;
+    }
+    
+    .pilier .pilier_content .principal {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        aspect-ratio: 1;
+        top: -15%;
+    }
+    .pilier .pilier_content .imageSlider {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 11.30/16;
+        overflow: hidden;
+    }
+    
+    .pilier .pilier_content .imageSlider > div:first-child, 
+    .pilier .pilier_content .imageSlider > div:last-child{
+        width: 100%;
+        height: 125px;
+        z-index: 1;
+    }
+    
+    .pilier .pilier_content .imageSlider > div:last-child {
+        background: linear-gradient(to top, #fff 20%, rgba(255, 255, 255, 0) 100%);
+        
+    }
+    .pilier .pilier_content .imageSlider > div:first-child {
+        background: linear-gradient(to bottom, #fff 20%, rgba(255, 255, 255, 0) 100%);
+    }
+    
+    
+    .pilier .pilier_content .imageSlider_parent {
+        width: 100%;
+        aspect-ratio: 1;
+        position: relative;
+    }
+    .pilier .pilier_content .imageSlider_parent .imageSlider_content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        position: absolute;
+        top: 0;
+        transform: translateY(-618px);
+        transition: all .5s ease-in-out .3s;
+    } 
+    
+    .pilier .pilier_content .imageSlider_parent .imageSlider_content .imageSlider_child {
+        width : 100%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 32px;
+        background: #F5F5F5;
+    }
+    
+    .pilier .pilier_content .imageSlider_parent .imageSlider_content .imageSlider_child img {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+        object-position: 0% center;
+        border-radius: 16px;
+        box-shadow: 0px 4px 23px 0px rgba(0, 0, 0, 0.137);
+    }
+
+    
+
+    
+}
+
+@media (min-width : 300px) and (max-width : 756px) {
+    .pilier {
+        padding: 100px 0;
+    }
+    .pilier .pilier_content .champs * {
+        color: #000;
+        font-family: Montserrat;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+    }
+    .pilier .pilier_content .champs[data-open = 'true'] .champs_titre {
+        color: #C22127;
+        font-family: Montserrat;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%;
+        margin-bottom: 16px;
+        width: 90%;
+    }
+    .pilier_header .pilier_label {
+        padding: 10px 24px;
+        background-color: #c12227;
+        margin: 0 auto 18px;
+    } 
+
+    .pilier_header div:last-child {
+        width: max-content;
+        margin-bottom: 24px;
+        font-size: 38px;
+        margin: 0 auto 24px;
+    }
+
+    .pilier .pilier_content > .imge {
+        display: none;
+    }
+
+    .champs_element .imageSlider_child {
+        width : 100%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        background: #F5F5F5;
+        margin-top: 16px;
+    }
+    .champs_element .imageSlider_child img {
+        width: 80%;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+        object-position: 0% center;
+        border-radius: 16px;
+        box-shadow: 0px 4px 23px 0px rgba(0, 0, 0, 0.137);
+    }
+}
+
 /* fin piliers */
 
 /* Temoignage */
@@ -2619,6 +2872,7 @@ background-color: #f1f1f1;
     background-color: #c12227;
     font-weight: 500;
     color: white;
+    border-radius: 5px;
 }
 
 .testimony .haut h1 {
@@ -2642,6 +2896,7 @@ background-color: #f1f1f1;
     aspect-ratio: 1;
     background-color: #f4f4f4;
     padding: 36px;
+    border-radius: 5px;
 }
 .testimony .text {
     text-align: center;

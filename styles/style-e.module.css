@@ -269,7 +269,7 @@
 }
 
 .benef {
-  padding: 125px;
+  padding: 125px 0;
   background-image: var(--btn-color);
   color: white;
 }
