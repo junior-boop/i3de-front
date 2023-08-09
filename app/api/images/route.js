@@ -1,9 +1,9 @@
 import Image from "@/models/images"
-import { ConnectToDBImages } from "@/utils/database"
+import { connectToDB } from "@/utils/database"
 
 export const GET = async () => {
     try {
-        await ConnectToDBImages()
+        await ConnectToDB()
         const images = await Image.find({}).populate('name')
         console.log(images)
         return new Response(JSON.stringify(images), {status : 201})
@@ -16,7 +16,7 @@ export const GET = async () => {
 export const POST =  async (request) => {
     const {name, code_hex, mineType} = await request.json()
     try {
-        await ConnectToDBImages()
+        await ConnectToDB()
         const newImage = new Image({
             name , code_hex, mineType
         })
