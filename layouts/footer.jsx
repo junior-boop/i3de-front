@@ -77,12 +77,15 @@ export default function Footer(){
 
 
 function NewsLetter(){
-    const [mail, setMail] = useState('')
+    const [mail, setMail] = useState(' ')
+
 
     const handleSave = async () => {
         const newsLetter = {
-            name : mail,
+            mail : mail,
         } 
+
+        console.log(mail)
 
         const  headersList = {
             "Accept": "*/*",
@@ -101,7 +104,7 @@ function NewsLetter(){
     }
     return (
         <div className="newsletter">
-            <input type="email" value={mail} onChange={() => setMail()} />
+            <input type="text" value={mail} onChange={({target}) => setMail(target.value)} />
             <button onClick={handleSave}> Envoyer </button>
         </div>
     )

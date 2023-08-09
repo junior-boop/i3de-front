@@ -13,6 +13,8 @@ export async function POST(request){
         mail : mail
     })
     
+    console.log(mail)
+
     await NewsLettre.save()
     try { 
         
