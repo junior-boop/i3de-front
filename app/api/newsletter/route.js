@@ -8,13 +8,13 @@ export const GET = async () => {
 export async function POST(request){
     const { mail } = await request.json()
     
+    await connectToDB()
+    const NewsLettre = await new Mail({
+        mail : mail
+    })
+    
+    await NewsLettre.save()
     try { 
-        await connectToDB()
-        const NewsLettre = await new Mail({
-            mail : mail
-        })
-        
-        await NewsLettre.save()
         
         return new Response(JSON.stringify('save'), { status: 201 })
     } catch(error){
