@@ -7,7 +7,7 @@ import { useGlobalContext } from "@/context/global_context";
 import { useRouter } from "next/navigation";
 import generated_ID from "@/app/ressource/id_gen";
 import moment from "moment/moment";
-import dataImage from "@/firebase";
+import FirebaseStatut from "@/firebase";
 import {ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export default function New_Ressource(){
@@ -22,6 +22,7 @@ export default function New_Ressource(){
     const [btn_name, setBtn_name] = useState('Publier')
 
     const { USERLOGININFO } = useGlobalContext()
+    const dataBase = FirebaseStatut()
     // const Route = useRouter()
 
     const [userInfos, setUserInfos] = USERLOGININFO
@@ -118,7 +119,7 @@ export default function New_Ressource(){
     useEffect(() => {
         if(images.length > 0 && images.length === base64.length){
            if(titre.length !== 0 && description.length !== 0 && categorie.length !== 0){
-            
+
             let publication = {
                 images : JSON.stringify(images), 
                 titre : titre,
