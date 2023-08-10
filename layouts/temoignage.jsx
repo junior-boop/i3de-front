@@ -25,7 +25,7 @@ function Temoin({texte, image, auteur, poste}){
     return(
       <div className="temoin">
         <div className="text">
-          "{texte}"
+          {`${texte}`}
         </div>
         <div className="image">
           <div className="img" style={{backgroundImage : `url(${image})`}}>

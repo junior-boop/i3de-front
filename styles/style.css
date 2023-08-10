@@ -1320,6 +1320,15 @@ header p {
     transition: all .3s ease-in-out;
     z-index: 1201;
 }
+
+
+@media (min-width : 300px) and (max-width : 562px) {
+    .nav-overlay .nav-content {
+        width: 352px;
+    }
+}
+
+
 .nav-overlay .nav-content[data-visible = 'true'] {
     transform: translateX(0);
 }
@@ -2797,6 +2806,23 @@ background-color: #f1f1f1;
 }
 
 @media (min-width : 300px) and (max-width : 756px) {
+    .pilier .pilier_content .champs {
+        overflow: hidden;
+        height: 72px;
+        transition: none;
+    }
+    .pilier .pilier_content .champs[data-open = 'false'], 
+    .pilier .pilier_content .champs[data-open = 'true']  {
+        color: #000;
+        font-family: Montserrat;
+        font-size: 1.25rem;
+        line-height: 130%;
+        height: auto !important;
+    }
+    
+    .pilier .pilier_content .champs .champs_titre {
+        transition:none
+    }
     .pilier {
         padding: 100px 0;
     }
@@ -2804,11 +2830,9 @@ background-color: #f1f1f1;
         color: #000;
         font-family: Montserrat;
         font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 130%;
     }
-    .pilier .pilier_content .champs[data-open = 'true'] .champs_titre {
+    .pilier .pilier_content .champs[data-open = 'true'] .champs_titre,
+    .pilier .pilier_content .champs[data-open = 'false'] .champs_titre {
         color: #C22127;
         font-family: Montserrat;
         font-size: 28px;

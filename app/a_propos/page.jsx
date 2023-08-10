@@ -20,10 +20,10 @@ export default function Apropos(){
                 <div className='secteur h-auto'>
                     <div className="desc">
                     <div className="mb-10">
-                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">C'est quoi le projet I3DE ?</div>
+                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">C{"'"}est quoi le projet I3DE ?</div>
                     </div>
                         <div className="text-xl">
-                        Le projet Impression 3D pour l'Éducation (I3DE) vise l’amélioration de la
+                        Le projet Impression 3D pour l{"'"}Éducation (I3DE) vise l’amélioration de la
                         professionnalisation du processus pédagogique des écoles grâce aux technologies
                         d’impression 3D.<br/>
                         L’impression 3D est une technologie robuste, abordable et relativement récente qui permet
