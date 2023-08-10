@@ -7,6 +7,8 @@ import { useGlobalContext } from "@/context/global_context";
 import { useRouter } from "next/navigation";
 import generated_ID from "@/app/ressource/id_gen";
 import moment from "moment/moment";
+import dataImage from "@/firebase";
+import {ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export default function New_Ressource(){
 
@@ -49,32 +51,57 @@ export default function New_Ressource(){
 
     const HandleSubmit =() => {
         setSave(true)
-        base64.map(async (el) => {
+        // base64.map(async (el) => {
 
-            const image_object = {
-                name : el.name,
-                code_hex : el.image,
-                mineType : el.name.split('.')[1]
-            } 
-
-            const  headersList = {
-                "Accept": "*/*",
-                "Content-Type": "application/json"
-               }
-
-            let response = await fetch("/api/images", { 
-                method: "POST",
-                body: JSON.stringify(image_object),
-                headers: headersList
-            });
-
-            if(response.ok) {
-                setImages(el => [...el, image_object])
-            }
             
-        })
+
+        //     // const image_object = {
+        //     //     name : el.name,
+        //     //     code_hex : el.image,
+        //     //     mineType : el.name.split('.')[1]
+        //     // } 
+
+        //     // const  headersList = {
+        //     //     "Accept": "*/*",
+        //     //     "Content-Type": "application/json"
+        //     //    }
+
+        //     // let response = await fetch("/api/images", { 
+        //     //     method: "POST",
+        //     //     body: JSON.stringify(image_object),
+        //     //     headers: headersList
+        //     // });
+
+        //     // if(response.ok) {
+        //     //     setImages(el => [...el, image_object])
+        //     // }
+            
+        // })
         
-        setCount(base64.length)
+        // setCount(base64.length)
+
+        if (Storages !== null) {
+            base64.map(async (el) => {
+                   const imageRef = ref(Storages, `images/${el.name + Date.now()}`)
+                   await uploadBytes(imageRef, el.image_target).then( element => {
+                       getDownloadURL(element.ref).then(url => {
+                           const obj = {
+                               name: el.name,
+                               image: url,
+                               size: el.size
+                           }
+   
+                           setImages(el => [...el, obj])
+                           
+                       })
+                   })
+   
+                   
+               })
+               
+               setCount(base64.length)
+               
+           }
         
     };
 
@@ -91,6 +118,7 @@ export default function New_Ressource(){
     useEffect(() => {
         if(images.length > 0 && images.length === base64.length){
            if(titre.length !== 0 && description.length !== 0 && categorie.length !== 0){
+            
             let publication = {
                 images : JSON.stringify(images), 
                 titre : titre,

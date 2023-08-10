@@ -42,8 +42,11 @@ export default function Login(){
             })
 
             if(reponse.ok) {
-                console.log(reponse.json())
-                // router.back()
+                const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
+                setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
+                handleReduceLogIn({name, surname, mail, _id})
+                setIsLogin(true)
+                router.back()
             }
         } catch (error) {
             console.log(error, 1)
@@ -76,7 +79,7 @@ export default function Login(){
                 setIsloaded(true)
                 setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
                 setIsloaded(false)
-                // router.back()
+                router.back()
             }
         } catch (error) {
             console.log(error)
@@ -85,6 +88,10 @@ export default function Login(){
         }
     
     }
+
+    useEffect(() => {
+
+    })
 
     const handleGoogleSignIn  = async () => {
         try{
@@ -98,7 +105,7 @@ export default function Login(){
     return(
         <div>
             <div style={{background : '#fff9', display : isLoaded ? 'flex' : 'none'}} className="absolute top-0 left-0 w-full h-[100vh] z-50 items-center justify-center">
-                <img src="./load.gif" alt="" className="w-24" />
+                <img src="./load.gif" alt="" className="w-24 h-24" />
             </div>
             <div id="login">
                 

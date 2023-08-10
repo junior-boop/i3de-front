@@ -12,13 +12,15 @@ export async function POST(request){
         name, surname, mail, tel, pw, town, like, share
     }
 
-    await connectToDB()
-    const NewUser = new User({
-        name, surname, mail, tel, pw, town, like, share
-    })
-    await NewUser.save()
+    
 
     try { 
+        console.log(user)
+        await connectToDB()
+        const NewUser = new User({
+            name, surname, mail, tel, pw, town, like, share
+        })
+        await NewUser.save()
         return new Response(JSON.stringify(user), { status: 201 })
     } catch(error){
         return new Response('Il y a une erreur', { status: 500 })

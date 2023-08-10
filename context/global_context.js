@@ -33,7 +33,6 @@ function Global_context_Provider({children}){
 
             if(response.ok) {
                 const {name, surname, mail, pw, tel, town, like, share, _id, __v} = await response.json()
-                // console.log({name, surname, mail, pw, tel, town, like, share, _id, __v})
                 setUserInfos({name, surname, mail, pw, tel, town, like, share, _id, __v})
             }
         } catch (error) {
@@ -64,7 +63,7 @@ function Global_context_Provider({children}){
           id : data._id
         }
 
-        // console.log(user)
+        console.log(user)
         dispatch({type : IS_LOGIN, payload : user})
       }
 
