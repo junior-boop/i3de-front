@@ -21,7 +21,7 @@ export const POST =  async (request) => {
             name , code_hex, mineType
         })
 
-        // await newImage.save()
+        await newImage.save()
 
         return new Response(JSON.stringify(newImage), {status : 201})
     } catch (error) {

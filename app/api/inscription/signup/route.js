@@ -15,7 +15,6 @@ export async function POST(request){
     
 
     try { 
-        console.log(user)
         await connectToDB()
         const NewUser = new User({
             name, surname, mail, tel, pw, town, like, share

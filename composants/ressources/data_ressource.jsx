@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ImageItem from "./image_item";
 
 export default function RessourceField(){
@@ -13,10 +13,26 @@ export default function RessourceField(){
         setCurrentImage(id)
     }
 
+    // const fetchData = useCallback( async () => {
+
+    // })
+
+    const handleData = async () => {
+        const res = await fetch('/api/ressource')
+        const data = await res.json()
+
+        console.log(data)
+        setDataRessource(data)
+    }
+
+    useEffect(() => {
+        handleData()
+    }, [])
+
 
     return(
         <div className="column">
-            {dataRessource.map(({id, data}) => <ImageItem key={id} data = {data} id={id} onClick = {() => handleCurrentImage(id)} />)}
+            {dataRessource.map((el, key) => <ImageItem key={key} data = {el} id={el._id} onClick = {() => handleCurrentImage(el._id)} />)}
         </div>
     )
 }

@@ -25,9 +25,9 @@ export default function Ressource(){
                             <ListElement titre = 'Modèles 3D' />
                             <ListElement titre = 'Quelques exemples' />
                         </div>
-                        <RessourceField />
 
                     </div>
+                    <RessourceField />
                 </div>
             </Container>
             </section>

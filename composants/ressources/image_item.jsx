@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link"
 import { BxsLike, MaterialSymbolsCloudDownloadRounded, MdiShare } from "../icons"
+import { useEffect } from "react"
 
 export default function ImageItem({data, onClick, id}){
     const { categorie, createdAt, createdBy, images, description, titre, like } = data
@@ -14,13 +15,18 @@ export default function ImageItem({data, onClick, id}){
     // 
 
     useEffect(() => {
+        console.log(data)
+        console.log(imagesFormated)
+    }, [])
+
+    useEffect(() => {
        
     }, [like])
 
     return(
         <div className="ImageItem" >
             <div className="col-12 p-0 image" style={{ cursor : 'pointer', position : 'relative', overflow : 'hidden'}}>
-                <img src={imagesFormated[0].image} width={'100%'}  alt = {'imagegroup'} />  
+                <img src={imagesFormated[0].code_hex} width={'100%'}  alt = {'imagegroup'} />  
                 <div className="little_menu">
                     <Button icon={<BxsLike style = {{ width : 20, hieght : 20}} />} onClick = {handleLikeBtn} />
                     <Button icon={<MaterialSymbolsCloudDownloadRounded style = {{ width : 20, hieght : 20}} />}/>

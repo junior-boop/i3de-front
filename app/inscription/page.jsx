@@ -6,10 +6,13 @@ import { useGlobalContext } from "@/context/global_context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import useFirebase from "@/firebase/firebase";
+import { ref, set } from "firebase/database";
 
 export default function Login(){
     const [visible, setVisible] = useState(false)
     const [isLoaded, setIsloaded] = useState(false)
+    const { Database } = useFirebase()
 
     const { handleReduceLogIn, LOGINCONTEXT, USERLOGININFO } = useGlobalContext()
     const {isLogin, setIsLogin} = LOGINCONTEXT
@@ -24,35 +27,56 @@ export default function Login(){
         const target = e.target
 
 
-        const user = {
-            name : target[0].value,
-            surname : target[1].value,
-            mail : target[2].value,
-            tel : "+237"+target[3].value,
-            pw : target[4].value,
-            town : target[5].value,
-            like : [''],
-            share : [''],
-        }
-
-        try {
-            const reponse = await fetch("/api/inscription/signup", {
-                method : 'POST',
-                body : JSON.stringify(user)
-            })
-
-            if(reponse.ok) {
-                const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
-                setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
-                handleReduceLogIn({name, surname, mail, _id})
-                setIsLogin(true)
-                router.back()
+        // if(Database !== null){
+            const user = {
+                name : target[0].value,
+                surname : target[1].value,
+                mail : target[2].value,
+                tel : "+237"+target[3].value,
+                pw : target[4].value,
+                town : target[5].value,
+                like : [''],
+                share : [''],
             }
-        } catch (error) {
-            console.log(error, 1)
-        } finally {
-            setIsloaded(false)
-        }
+
+            // const Dataref = ref(Database, 'users/' + Date.now())
+
+            // console.log(user)
+            // setTimeout(() => {
+            //     set(Dataref, user).then(() => {
+            //         setUserInfos(user)
+            //         handleReduceLogIn({name : user.name, surname : user.surname, mail : user.mail, _id})
+            //         console.log('good')
+            //         setIsloaded(false)
+            //         router.back()
+            //     })
+            //     .catch((error) => {
+            //         console.log(error)
+            //     })
+            //     .finally(() => {
+            //         setIsloaded(false)
+            //     })
+            // }, 1500)
+    
+            try {
+                const reponse = await fetch("/api/inscription/signup", {
+                    method : 'POST',
+                    body : JSON.stringify(user)
+                })
+    
+                if(reponse.ok) {
+                    const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
+                    setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
+                    handleReduceLogIn({name, surname, mail, _id})
+                    setIsLogin(true)
+                    router.back()
+                }
+            } catch (error) {
+                console.log(error, 1)
+            } finally {
+                setIsloaded(false)
+            }
+        // }
     
     }
     
@@ -77,8 +101,10 @@ export default function Login(){
                 const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
                 handleReduceLogIn({name, surname, mail, _id})
                 setIsloaded(true)
-                setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
-                setIsloaded(false)
+                setTimeout(() => {
+                    setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
+                    setIsloaded(false)
+                }, 3000)
                 router.back()
             }
         } catch (error) {

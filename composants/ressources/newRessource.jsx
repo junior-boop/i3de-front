@@ -7,8 +7,8 @@ import { useGlobalContext } from "@/context/global_context";
 import { useRouter } from "next/navigation";
 import generated_ID from "@/app/ressource/id_gen";
 import moment from "moment/moment";
-import FirebaseStatut from "@/firebase";
-import {ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+// import FirebaseStatut from "@/firebase/firebase";
+// import {ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export default function New_Ressource(){
 
@@ -22,8 +22,8 @@ export default function New_Ressource(){
     const [btn_name, setBtn_name] = useState('Publier')
 
     const { USERLOGININFO } = useGlobalContext()
-    const dataBase = FirebaseStatut()
-    // const Route = useRouter()
+    // const dataBase = FirebaseStatut()
+    const Route = useRouter()
 
     const [userInfos, setUserInfos] = USERLOGININFO
     
@@ -52,57 +52,33 @@ export default function New_Ressource(){
 
     const HandleSubmit =() => {
         setSave(true)
-        // base64.map(async (el) => {
+        base64.map(
+            async (el) => {
 
+            const image_object = {
+                name : el.name,
+                code_hex : el.image,
+                mineType : el.name.split('.')[1]
+            } 
+
+            const  headersList = {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+               }
+
+            let response = await fetch("/api/images", { 
+                method: "POST",
+                body: JSON.stringify(image_object),
+                headers: headersList
+            });
+
+            if(response.ok) {
+                setImages(el => [...el, image_object])
+            }
             
-
-        //     // const image_object = {
-        //     //     name : el.name,
-        //     //     code_hex : el.image,
-        //     //     mineType : el.name.split('.')[1]
-        //     // } 
-
-        //     // const  headersList = {
-        //     //     "Accept": "*/*",
-        //     //     "Content-Type": "application/json"
-        //     //    }
-
-        //     // let response = await fetch("/api/images", { 
-        //     //     method: "POST",
-        //     //     body: JSON.stringify(image_object),
-        //     //     headers: headersList
-        //     // });
-
-        //     // if(response.ok) {
-        //     //     setImages(el => [...el, image_object])
-        //     // }
-            
-        // })
+        })
         
-        // setCount(base64.length)
-
-        if (Storages !== null) {
-            base64.map(async (el) => {
-                   const imageRef = ref(Storages, `images/${el.name + Date.now()}`)
-                   await uploadBytes(imageRef, el.image_target).then( element => {
-                       getDownloadURL(element.ref).then(url => {
-                           const obj = {
-                               name: el.name,
-                               image: url,
-                               size: el.size
-                           }
-   
-                           setImages(el => [...el, obj])
-                           
-                       })
-                   })
-   
-                   
-               })
-               
-               setCount(base64.length)
-               
-           }
+        setCount(base64.length)
         
     };
 
@@ -113,18 +89,14 @@ export default function New_Ressource(){
 
 
     
-
-   
-
-    useEffect(() => {
-        if(images.length > 0 && images.length === base64.length){
-           if(titre.length !== 0 && description.length !== 0 && categorie.length !== 0){
+    const handlePublication = () => {
+        if(titre.length !== 0 && description.length !== 0 && categorie.length !== 0){
 
             let publication = {
                 images : JSON.stringify(images), 
                 titre : titre,
                 description : description, 
-                createdAt : Timestamp.fromDate(new Date()),
+                createdAt : new Date(),
                 createdBy : {
                     name : userInfos.name,
                     surname : userInfos.surname,
@@ -134,12 +106,40 @@ export default function New_Ressource(){
                 like : [""],
                 share : [""],
                 download : [""]
-            }
+            };
+
+
+            (async () => {
+                const  headersList = {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json"
+                   }
+    
+                let response = await fetch("/api/ressource/new", { 
+                    method: "POST",
+                    body: JSON.stringify(publication),
+                    headers: headersList
+                });
+    
+                if(response.ok) {
+                    console.log('je vais bien')
+                }
+            })()
 
             
            } else {
             alert("Remplissez tous les champs avant de sauvegader")
            }
+
+           console.log('ville')
+    }
+   
+
+    useEffect(() => {
+        console.log(images.length, base64.length)
+        if(images.length > 0 && images.length === base64.length){
+            console.log('ville, 1')
+           handlePublication()
         }
     }, [images])
 
@@ -158,7 +158,7 @@ export default function New_Ressource(){
                 setSave(false)
                 setBtn_name("Enregisté")
                 setTimeout(() => {
-                    // Route.back()
+                    Route.back()
                 }, 1000)
             }, 3000)
     
