@@ -14,7 +14,7 @@ export default function Cible(){
               <div className="more">
                 <a href="/">
                   <button>
-                  Avoir plus d’information
+                  Avoir plus d’informations
                   </button>
                 </a>
               </div>

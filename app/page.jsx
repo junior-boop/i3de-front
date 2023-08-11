@@ -5,6 +5,7 @@ import Cible from '@/layouts/cible'
 import Header from '@/layouts/header'
 import Mission from '@/layouts/mission'
 import Objectifs from '@/layouts/objectifs'
+import PrincipalCible from '@/layouts/partenaire'
 import Partenaire from '@/layouts/partenaires'
 // import Principal from '@/layouts/principe'
 import Services from '@/layouts/services'
@@ -22,7 +23,8 @@ export default function Home() {
       <Beneficiaire />
       <Objectifs />
       <Cible />
-      <Principal />
+      {/* <Principal /> */}
+      <PrincipalCible />
       <Services />
       <Testimony /> 
       <Partenaire />

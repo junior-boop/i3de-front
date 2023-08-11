@@ -749,6 +749,7 @@ header p {
    color : black;
    font-size: 18px ;
    font-weight: 600;
+   text-align: justify;
 }
 #presentation .container > .secteur .desc .text + .text {
     margin-top: 12px;
