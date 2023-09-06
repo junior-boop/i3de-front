@@ -1,38 +1,23 @@
-"use client"
 
-import { useCallback, useEffect, useState } from "react";
 import ImageItem from "./image_item";
 
-export default function RessourceField(){
-    const [open, setOpen] = useState(false)
-    const [dataRessource, setDataRessource] = useState([])
-    const [currentImage, setCurrentImage] = useState(1)
 
-    const handleCurrentImage = (id) => {
-        setOpen(!open)
-        setCurrentImage(id)
-    }
+const getData = async () => {
+    const response = await fetch('http://18.215.69.15:3000/api/ressources/', { cache : 'no-store'})
+    const data = await response.json()
 
-    // const fetchData = useCallback( async () => {
+    if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
 
-    // })
+    return data
+}
+export default async function RessourceField(){
 
-    const handleData = async () => {
-        const res = await fetch('/api/ressource')
-        const data = await res.json()
-
-        console.log(data)
-        setDataRessource(data)
-    }
-
-    useEffect(() => {
-        handleData()
-    }, [])
-
+    const data = await getData()
+    console.log(data)
 
     return(
         <div className="column">
-            {dataRessource.map((el, key) => <ImageItem key={key} data = {el} id={el._id} onClick = {() => handleCurrentImage(el._id)} />)}
+            {data.map((el, key) => <ImageItem key={key} data = {el} id={el.key}  />)}
         </div>
     )
 }
