@@ -85,3 +85,13 @@ img {
 .faq_element_repondre li {
     @apply text-xl list-disc
 }
+
+.descrition {
+    overflow-y: auto;
+    @apply flex-1 h-[90%]
+    
+}
+
+.descrition ::-webkit-scrollbar {
+    display: none;
+}

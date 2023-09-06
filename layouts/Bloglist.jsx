@@ -1,7 +1,11 @@
 import BlogItem from "../composants/blog";
 import Container from "../composants/container";
 
-export default function Bloglist(){
+
+
+export default async function Bloglist(){
+
+    
     return(
         <section id="bloglist">
             <Container>

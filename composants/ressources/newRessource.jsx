@@ -55,25 +55,23 @@ export default function New_Ressource(){
         base64.map(
             async (el) => {
 
-            const image_object = {
-                name : el.name,
-                code_hex : el.image,
-                mineType : el.name.split('.')[1]
-            } 
+            const bodyContent = new FormData()
+            bodyContent.append('image', el.image_target)
 
             const  headersList = {
                 "Accept": "*/*",
-                "Content-Type": "application/json"
                }
 
-            let response = await fetch("/api/images", { 
+            let response = await fetch("http://18.215.69.15:3000/api/images", { 
                 method: "POST",
-                body: JSON.stringify(image_object),
+                body: bodyContent,
                 headers: headersList
             });
 
             if(response.ok) {
-                setImages(el => [...el, image_object])
+                const images = await response.json()
+                console.log(images)
+                setImages(el => [...el, images[0]])
             }
             
         })
@@ -100,7 +98,7 @@ export default function New_Ressource(){
                 createdBy : {
                     name : userInfos.name,
                     surname : userInfos.surname,
-                    user_id : userInfos.id
+                    user_id : userInfos._id
                 },
                 categorie : categorie,
                 like : [""],
@@ -115,7 +113,7 @@ export default function New_Ressource(){
                     "Content-Type": "application/json"
                    }
     
-                let response = await fetch("/api/ressource/new", { 
+                let response = await fetch("http://18.215.69.15:3000/api/ressources", { 
                     method: "POST",
                     body: JSON.stringify(publication),
                     headers: headersList
@@ -189,7 +187,7 @@ export default function New_Ressource(){
                         <div className="descrption_ressource">
                             <textarea onChange={({ target }) => setDescription(target.value)} placeholder="Description de la réalisation"></textarea>
                         </div>
-                        <div className="categorie">
+                        <div className="categorie mb-2">
                             <h4>Categorie</h4>
                             <select name="categorie" onChange={({target}) => setCategorie(target.value)}>
                                 <option value={''}>Choisir une categorie</option>
@@ -201,7 +199,7 @@ export default function New_Ressource(){
                         <div className="details">
                             <div className="champ">
                                 <span>Auteur</span>
-                                {/* <span>{userInfos?.surname.split(' ')[0]} {userInfos.name}</span> */}
+                                <span>{userInfos?.surname.split(' ')[0]} {userInfos.name}</span>
                             </div>
                             <div className="champ">
                                 <span>Date</span>

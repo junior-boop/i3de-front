@@ -1,6 +1,5 @@
 import User from "@/models/user"
 import { connectToDB } from "@/utils/database"
-import FirebaseStatut from "@/firebase/firebase"
 
 export const GET = async () => {
     return new Response('je suis inscription')

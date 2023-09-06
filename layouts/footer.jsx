@@ -48,7 +48,7 @@ export default function Footer(){
                         </h5>
                         <ul>
                             <li>
-                                Inscrivez-vous aujourd'hui pour obtenir des informations et les dernières nouvelles sur les produits
+                                Inscrivez-vous aujourd{"'"}hui pour obtenir des informations et les dernières nouvelles sur les produits
                             </li>
                             <li>
                                 <NewsLetter />
@@ -85,16 +85,16 @@ function NewsLetter(){
             mail : mail,
         } 
 
-        console.log(mail)
+        let bodyContent = new FormData();
+            bodyContent.append("mail", newsLetter.mail);
 
         const  headersList = {
-            "Accept": "*/*",
-            "Content-Type": "application/json"
+            "Accept": "*/*"
            }
 
-        let response = await fetch("/api/newsletter", { 
+        let response = await fetch("http://18.215.69.15:3000/api/newsletter", { 
             method: "POST",
-            body: JSON.stringify(newsLetter),
+            body: bodyContent,
             headers: headersList
         });
 

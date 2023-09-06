@@ -8,10 +8,9 @@ export const GET = async () => {
 export async function POST(request){
     const { mail } = await request.json()
     
-    await connectToDB()
-    const NewsLettre = await new Mail({
+    const NewsLettre = {
         mail : mail
-    })
+    }
     
     console.log(mail)
 

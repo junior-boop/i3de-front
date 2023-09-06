@@ -2,46 +2,44 @@
 
 import Container from "@/composants/container"
 import { BxsLike, MaterialSymbolsCloudDownloadRounded, MdiShare, QuillArrowLeft, QuillChevronLeft, QuillChevronRight, QuillLoadingSpin } from "@/composants/icons"
-import { useGlobalContext } from "@/context/global_context"
-import { doc, runTransaction } from "firebase/firestore"
 // import Link from "next/link"
 import { useEffect, useState } from "react"
-
 import {useRouter} from "next/navigation"
+import { useGlobalContext } from "@/context/global_context"
 
 export default function HandleRessource({params}){
 
-    const { Database } = useGlobalContext()
+    const { id } = params
     const router = useRouter()
 
     const [Data, setData] = useState({})
+    const { USERLOGININFO } = useGlobalContext()
+    const [user ] = USERLOGININFO
 
-    
+
     useEffect(() => {
-        if(Database !== null){
-            const docref = doc(Database, 'realisations', params['id-ressource']);
-            
-             ( async function(){
-                try {
-                    const newPopulation = await runTransaction(Database, async (transaction) => {
-                    const resdoc = await transaction.get(docref);
-                    if (!resdoc.exists()) {
-                        throw "Document does not exist!";
-                    }
-
-                    return resdoc.data()
-                    });
-                
-                    setData(newPopulation)
-                } catch (e) {
-                    console.error(e);
-                }
-            })()
-        }
-    }, [Database])
-
-
+        (async () => {
+            const response = await fetch('http://18.215.69.15:3000/api/ressources/'+id)
+            const data = await response.json()
+            setData({...data})
+        })()
+    }, [])
     
+    const handleLike = async () => {
+        const user_id = user._id
+        console.log(user_id)
+        const response = await fetch(`http://18.215.69.15:3000/api/ressources/${id}/like?like=${user_id}`, {
+            method : "PUT"
+        })
+
+        const like = await response.json()
+        if( response.ok ){
+            console.log(like)
+            setData({ ...Data, like : like.like })
+        }
+    }
+
+
     return(
         <div>
             <div style={{borderBottom : "1px solid #f1f1f1", marginBottom : 28}}>
@@ -90,8 +88,8 @@ export default function HandleRessource({params}){
                                     : `${Data.createdBy.name} ${Data.createdBy.surname}`
                                    }
                                 </div>
-                                <div className="mt-5 font-semibold">Description</div>
-                                <div className="text-lg">
+                                <div className="mt-5 font-semibold mb-2">Description</div>
+                                <div className="text-base descrition">
                                 {
                                     Data.titre === undefined 
                                     ? (
@@ -114,7 +112,7 @@ export default function HandleRessource({params}){
                             <div className="border-t border-gray-100 pt-3">
                                 
                                 <div className="flex items-center">
-                                    <Button icon={<BxsLike style = {{ width : 24, hieght : 24}} />} number={Data.like !== undefined ? Data.like.length : '0'} />
+                                    <Button onClick={handleLike} icon={<BxsLike style = {{ width : 24, hieght : 24}} />} number={Data.like !== undefined ? Data.like.length - 1 : '0'} />
                                     <Button icon={<MaterialSymbolsCloudDownloadRounded style = {{ width : 24, hieght : 24}} />}/>
                                     <Button icon={<MdiShare style = {{ width : 24, hieght : 24}} />}/>
                                 </div>
@@ -128,7 +126,18 @@ export default function HandleRessource({params}){
 
 function Slider({images}){
 
-    const imagesParse = images !== undefined && JSON.parse(images)
+    const imagesFunc  = () => {
+        const tb = []
+        const imagesFormats = images?.replace(/\[|\]/g, '')
+        const dataIMage = imagesFormats?.split(',')
+
+        dataIMage?.forEach(element => {
+            tb.push(element.replace(/\"/g, ''))
+        });
+        
+        return tb
+    }
+    const imagesParse = imagesFunc()
     const [position, setPosition] = useState(0)
 
 
@@ -150,11 +159,14 @@ function Slider({images}){
 
     const imgsrc = () => {
         if(imagesParse[position] !== undefined){
-            return imagesParse[position].image
+            return 'http://18.215.69.15:3000'+imagesParse[position]
         } else return '/assets/images/photo-19jpg'
     }
 
+    
+
     useEffect(() => {
+        console.log(imgsrc())
         if(position > imagesParse.length - 1) setPosition(0)
         if(position < 0) setPosition(imagesParse.length-1)
     }, [position])
@@ -163,15 +175,16 @@ function Slider({images}){
         if(images !== undefined){
             return(
                 <>
-                    <div className="opacity-30 hover:opacity-100 w-48 aspect-square rounded-full bg-[#00000067] flex items-center justify-end absolute top-[50%] translate-y-[-50%] left-0 translate-x-[-60%] overflow-hidden transition-all duration-[300ms]">
+                    <div className=" z-30 opacity-30 hover:opacity-100 w-48 aspect-square rounded-full bg-[#00000067] flex items-center justify-end absolute top-[50%] translate-y-[-50%] left-0 translate-x-[-60%] overflow-hidden transition-all duration-[300ms]">
                         <button style={{outline : 'none'}} className="w-24 h-24 flex items-center justify-center outline-none transition-all duration-[300ms] active:scale-90" onClick={() => setPosition(position - 1)}>
                             <QuillChevronLeft className = "w-10 h-10 text-white" />
                         </button>
                     </div>
-                    <div className="w-full h-full rounded-2xl overflow-hidden">
-                        <img className="w-full h-full object-cover" src={imgsrc()} alt="" />
+                    <div className="z-10 w-full h-full rounded-2xl overflow-hidden bg-cover relative flex items-center justify-center" style={{backgroundImage : `url(${imgsrc()})`, backgroundPosition: 'center', backgroundRepeat : 'no-repeat'}}>
+                        <div className="w-full h-full " style={{backgroundColor : '#fff7', backdropFilter : 'blur(18px)'}}></div>
+                        <img className="w-[95%] aspect-auto object-contain absolute rounded-lg" src={imgsrc()} alt="" />
                     </div>
-                    <div className=" opacity-30 hover:opacity-100 w-48 aspect-square rounded-full bg-[#00000067] flex items-center justify-start absolute top-[50%] translate-y-[-50%] right-0 translate-x-[60%] overflow-hidden transition-all duration-[300ms]">
+                    <div className=" z-30 opacity-30 hover:opacity-100 w-48 aspect-square rounded-full bg-[#00000067] flex items-center justify-start absolute top-[50%] translate-y-[-50%] right-0 translate-x-[60%] overflow-hidden transition-all duration-[300ms]">
                         <button style={{outline : 'none'}} className="w-24 h-24 flex items-center justify-center outline-none transition-all duration-[300ms] active:scale-90" onClick={() => setPosition(position + 1)}>
                             <QuillChevronRight className = "w-10 h-10 text-white" />
                         </button>

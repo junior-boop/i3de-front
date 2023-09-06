@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 
 import Beneficiaire from '@/layouts/beneficaire'
 import Cible from '@/layouts/cible'

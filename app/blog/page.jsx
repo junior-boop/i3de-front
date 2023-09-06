@@ -1,24 +1,51 @@
-'use client'
-
 import Container from "@/composants/container"
-import { QuillChevronLeft, QuillChevronRight } from "@/composants/icons"
 import Titre from "@/composants/titre"
 import Bannier from "@/layouts/bannier"
 import Link from "next/link"
 
-export default function ActualitesRoot(){
+import moment from "moment"
+
+
+const getData = async () => {
+    const response = await fetch('http://18.215.69.15:3000/api/articles', { next: { revalidate: 3600 }})
+    const data = await response.json()
+
+    if(!response.ok) throw new Error('il y a une errreur dans le transfert')
+
+    return data
+}
+
+
+export default async function ActualitesRoot(){
+
+    // const Data = await getData()
+    // console.log(Data[1].value)
+
+    // const liste = Data.map(el => {
+    //     const { key, images, titre, createdAt } = el.value.Item
+    //     return <Article image={images[0]} id={key} titre={titre} key={key}/>
+    // })
+    const data = await getData()
+
+    const liste = data.map((el, key) => {
+        const value = el.value
+        console.log(value)
+
+        const { images, titre, createdAt } = value.Item
+        return <Article key={key} id = {el.key} image={images[0]} date={createdAt} titre={titre} />
+    })
     return(
         <div>
             <Bannier name={'Blog'} />
             <Container>
                 <Titre titre={'Denières nouvelles'} className="font-semibold"/>
-                <div className="grid grid-cols-3 gap-3 mb-10">
-                    <Article />
-                    <Article />
-                    <Article />
+                <div className="grid grid-cols-3 gap-3 mb-10 md:flex md:flex-col">
+                    {
+                        liste
+                    }
                 </div>
 
-                <div className="flex item-center gap-4 mb-6 justify-center">
+                {/* <div className="flex item-center gap-4 mb-6 justify-center">
                     <div>
                         <button className="w-11 h-11 rounded-full flex items-center justify-center bg-special">
                             <QuillChevronLeft className = "w-6 h-6 text-white" />
@@ -32,26 +59,62 @@ export default function ActualitesRoot(){
                             <QuillChevronRight className = "w-6 h-6 text-white" />
                         </button>
                     </div>
-                </div>
+                </div> */}
             </Container>
         </div>
     )
 }
 
-function Article(){
+function Article({ titre, date, id, image}){
+
+    const calculeDataEcart = (userData) => {
+        const day = ['Dim','Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']
+        const mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Novembre', 'Décembre']
+    
+        const thisDay = moment(Date.now()).dayOfYear()
+        const date = moment(userData)
+        const publicationYear = date.year()
+        const thisYear = moment(Date.now()).year()
+    
+        const hrs = date.hours() < 10 ? "0"+date.hours() : date.hours()
+        const min = date.minutes() < 10 ? "0"+date.minutes() : date.minutes()
+        
+    
+        if(thisYear === publicationYear ){
+            const ecart = thisDay - date.dayOfYear()
+            
+
+            console.log('cette annee')
+            console.log(ecart) 
+            
+            if(ecart === 0) return "Aujourd'hui"
+            if(ecart === 1) return "hier à " + hrs + " : " + min
+            if(ecart > 1) return "Il y " + ecart + " jours à " + hrs + " : " + min
+            if(ecart > 7) return "Il y " + Math.floor(ecart / 7) + " semaines à " + hrs + " : " + min
+            if(ecart > 28) return "Il y " + Math.floor(ecart / 28) + " mois à " + hrs + " : " + min
+        }
+        if(thisYear > publicationYear ){
+            const ecart = thisYear - publicationYear
+            console.log('annee derniere')
+            if(ecart === 1) return "Année dernière à " + hrs + " : " + min
+        }
+    
+    }
+
+
     return (
-        <Link href={'/blog/1234'} className="w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300">
+        <Link href={'/blog/'+id} className="w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300 sm:flex">
             <div>
                 <div className="w-full aspect-[4/3] overflow-hidden rounded-xl">
-                    <img src="/assets/images/photo-19.jpg" alt="" className="w-full h-full object-cover object-center" />
+                    <img src={`http://18.215.69.15:3000${image}`} alt="" className="w-full h-full object-cover object-center" />
                 </div>
             </div>
             <div className="mt-3 mb-4">
                 <div className="text-3xl font-bold text-gray-800">
-                    le titre de l{"'"}article
+                    { titre }
                 </div>
                 <div className="text-gray-500 font-semibold">
-                    Publier le : 12 avril 2023
+                    Publier le : {calculeDataEcart(date)}
                 </div>
             </div>
         </Link>

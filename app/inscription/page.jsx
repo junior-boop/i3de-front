@@ -27,7 +27,6 @@ export default function Login(){
         const target = e.target
 
 
-        // if(Database !== null){
             const user = {
                 name : target[0].value,
                 surname : target[1].value,
@@ -38,30 +37,18 @@ export default function Login(){
                 like : [''],
                 share : [''],
             }
-
-            // const Dataref = ref(Database, 'users/' + Date.now())
-
-            // console.log(user)
-            // setTimeout(() => {
-            //     set(Dataref, user).then(() => {
-            //         setUserInfos(user)
-            //         handleReduceLogIn({name : user.name, surname : user.surname, mail : user.mail, _id})
-            //         console.log('good')
-            //         setIsloaded(false)
-            //         router.back()
-            //     })
-            //     .catch((error) => {
-            //         console.log(error)
-            //     })
-            //     .finally(() => {
-            //         setIsloaded(false)
-            //     })
-            // }, 1500)
     
+            let bodyContent = new FormData()
+
+            for(let key in user){
+                bodyContent.append(key, user[key])
+            }
+
             try {
-                const reponse = await fetch("/api/inscription/signup", {
+                console.log(bodyContent.get('pw'))
+                const reponse = await fetch("http://18.215.69.15:3000/api/inscription/signin", {
                     method : 'POST',
-                    body : JSON.stringify(user)
+                    body : bodyContent
                 })
     
                 if(reponse.ok) {
@@ -69,14 +56,13 @@ export default function Login(){
                     setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
                     handleReduceLogIn({name, surname, mail, _id})
                     setIsLogin(true)
-                    router.back()
+                    // router.back()
                 }
             } catch (error) {
                 console.log(error, 1)
             } finally {
                 setIsloaded(false)
             }
-        // }
     
     }
     
@@ -91,21 +77,31 @@ export default function Login(){
             pw : target[1].value,
         }
 
+        const userText = `mail=${target[0].value}&pw=${target[1].value}`
+
+        let headersList = {
+            "Accept": "*/*",
+            "Content-Type": "application/x-www-form-urlencoded"
+           }
+
         try {
-            const reponse = await fetch("/api/inscription/login", {
+            const reponse = await fetch("http://18.215.69.15:3000/api/inscription/login", {
                 method : 'POST',
-                body : JSON.stringify(user)
+                body : userText,
+                headers : headersList
             })
 
             if(reponse.ok) {
-                const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
-                handleReduceLogIn({name, surname, mail, _id})
-                setIsloaded(true)
+                const {key, value} = await reponse.json()
+                const { name, surname, mail, pw, tel, town, like, share} = value
+                handleReduceLogIn({name, surname, mail, _id : key, pw})
+                
                 setTimeout(() => {
-                    setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
-                    setIsloaded(false)
+                    setUserInfos({name, surname, mail, _id : key, pw, tel, town, like, share})
+                    setIsloaded(true)
+                    setIsLogin(true)
+                    router.back()
                 }, 3000)
-                router.back()
             }
         } catch (error) {
             console.log(error)
@@ -284,3 +280,7 @@ const Login_Space = ({onSubmit}) => {
          </div>
     )
 }
+
+
+// junor3@uhjlijlk.ujhkju
+// clkdjnckdfjvndkfjvndkjfvndkjf

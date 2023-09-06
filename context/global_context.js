@@ -25,16 +25,16 @@ function Global_context_Provider({children}){
        
 
     const handleUser = async (data) => {
-        console.log(data)
-        try {
-            const response = await fetch('/api/inscription/login', {
-                method : 'POST',
-                body : JSON.stringify(data)
-            })
 
+        try {
+            const response = await fetch("http://18.215.69.15:3000/api/inscription/" + data.key, { cache : "no-store"})
+            const responseJson = await response.json()
+            console.log(responseJson)
+
+            const {name, surname, mail, pw, tel, town, key} = responseJson
             if(response.ok) {
-                const {name, surname, mail, pw, tel, town, like, share, _id, __v} = await response.json()
-                setUserInfos({name, surname, mail, pw, tel, town, like, share, _id, __v})
+                setUserInfos({name, surname, mail, pw, tel, town, _id : key})
+
             }
         } catch (error) {
             console.log(error)
@@ -49,8 +49,10 @@ function Global_context_Provider({children}){
             
             if(ls.getItem(key) !== null && ls.getItem(key).length >= 10){
                 const ls_data = JSON.parse(ls.getItem(key))
+
+                console.log(ls_data)
                 
-                handleUser({ mail : ls_data.mail })
+                handleUser({ mail : ls_data.mail, key : ls_data.id })
                 setIsLogin(true)
             }
         }

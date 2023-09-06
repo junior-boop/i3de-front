@@ -40,9 +40,12 @@ export default function NavBar(){
     const getUsetInfos = async () => {
         const get = await userInfos
 
+        console.log(get)
         if(get.hasOwnProperty('name')){
-            setName(get.name.split(' ')[0])
-            setSurname(get.surname.split(' ')[0])
+            if(get.name.includes(' ')) setName(get.name.split(' ')[0])
+            else setName(get.name)
+            if(get.surname.includes(' '))setSurname(get.surname.split(' ')[0])
+            else setSurname(get.surname)
         }
     }
 
