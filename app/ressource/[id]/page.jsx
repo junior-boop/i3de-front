@@ -14,7 +14,7 @@ export default function HandleRessource({params}){
 
     const [Data, setData] = useState({})
     const { USERLOGININFO } = useGlobalContext()
-    const [user ] = USERLOGININFO
+    const [ user ] = USERLOGININFO
 
 
     useEffect(() => {

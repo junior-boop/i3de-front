@@ -1,24 +1,25 @@
-
+'use client'
 import Container from "@/composants/container"
 import Ressource_btn from "@/composants/ressources/ressource_btn"
 import Ressources_client from "@/composants/ressources/ressource_client"
 import { Bannier_second } from "@/layouts/bannier"
+import { useEffect, useState } from "react"
 
 
-
-const getData = async () => {
-    const response = await fetch('http://18.215.69.15:3000/api/ressources/', { next : { revalidate : 3600} })
-    const data = await response.json()
-
-    if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
-
-    return data
-}
+export default  function Ressource(){    
+     const [Data, setData] = useState([])
 
 
-export default async function Ressource(){    
-     
-    const data = await getData()
+    useEffect(() => {
+        (async() => {
+            const response = await fetch('http://18.215.69.15:3000/api/ressources/', { cache : 'no-store' })
+            const data = await response.json()
+
+            if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
+
+            setData( el => [...el, data])
+        })()
+    }, [])
 
     return(
         <div>
@@ -27,7 +28,7 @@ export default async function Ressource(){
             </Bannier_second>
             <section id = 'ressource'>
             <Container>
-                <Ressources_client data = {data} />
+                <Ressources_client data = {Data} />
             </Container>
             </section>
             

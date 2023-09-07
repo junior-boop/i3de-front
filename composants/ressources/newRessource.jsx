@@ -7,8 +7,7 @@ import { useGlobalContext } from "@/context/global_context";
 import { useRouter } from "next/navigation";
 import generated_ID from "@/app/ressource/id_gen";
 import moment from "moment/moment";
-// import FirebaseStatut from "@/firebase/firebase";
-// import {ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+
 
 export default function New_Ressource(){
 
@@ -22,7 +21,6 @@ export default function New_Ressource(){
     const [btn_name, setBtn_name] = useState('Publier')
 
     const { USERLOGININFO } = useGlobalContext()
-    // const dataBase = FirebaseStatut()
     const Route = useRouter()
 
     const [userInfos, setUserInfos] = USERLOGININFO
@@ -126,7 +124,8 @@ export default function New_Ressource(){
 
             
            } else {
-            alert("Remplissez tous les champs avant de sauvegader")
+               alert("Remplissez tous les champs avant de sauvegader")
+               Route.refresh()
            }
 
            console.log('ville')
@@ -199,7 +198,7 @@ export default function New_Ressource(){
                         <div className="details">
                             <div className="champ">
                                 <span>Auteur</span>
-                                <span>{userInfos?.surname.split(' ')[0]} {userInfos.name}</span>
+                                <span>{userInfos?.length !== undefined ? userInfos?.surname.split(' ')[0] : ''} {userInfos.name}</span>
                             </div>
                             <div className="champ">
                                 <span>Date</span>
