@@ -1,12 +1,25 @@
+
 import Container from "@/composants/container"
-import {RiSearchLine } from "@/composants/icons"
-import RessourceField from "@/composants/ressources/data_ressource"
 import Ressource_btn from "@/composants/ressources/ressource_btn"
+import Ressources_client from "@/composants/ressources/ressource_client"
 import { Bannier_second } from "@/layouts/bannier"
 
 
-export default function Ressource(){    
-    
+
+const getData = async () => {
+    const response = await fetch('http://18.215.69.15:3000/api/ressources/', { next : { revalidate : 3600} })
+    const data = await response.json()
+
+    if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
+
+    return data
+}
+
+
+export default async function Ressource(){    
+     
+    const data = await getData()
+
     return(
         <div>
             <Bannier_second name={'Ressources'} style={{display : 'flex', alignItems : 'center'}}>
@@ -14,21 +27,7 @@ export default function Ressource(){
             </Bannier_second>
             <section id = 'ressource'>
             <Container>
-                <div className="ressource">
-                    <div className="option">
-                        <h3> Recherche </h3>
-                            <InputSearch placeholder={'Rechercher une ressource'} />
-                        <h5 style = {{marginBottom : 12}}>Filtre</h5>
-                        <div>
-                            <ListElement titre = 'Tous les éléments' />
-                            <ListElement titre = 'Fiches pédagogiques'/>
-                            <ListElement titre = 'Modèles 3D' />
-                            <ListElement titre = 'Quelques exemples' />
-                        </div>
-
-                    </div>
-                    <RessourceField />
-                </div>
+                <Ressources_client data = {data} />
             </Container>
             </section>
             
@@ -41,24 +40,5 @@ export default function Ressource(){
 
 
 
-
-function ListElement({titre}){
-    return(
-        <div className="listeElement">
-           {titre}
-        </div>
-    )
-} 
-
-function InputSearch({ value, onChange, placeholder}){
-    return(
-        <div className="inputBase">
-            <input type="text" value={value} onChange={onChange} placeholder={placeholder} />
-            <div className="icon">
-                <RiSearchLine style = {{ width : 20, hieght : 20, color : 'white'}}/>
-            </div>
-        </div>
-    )
-}
 
 
