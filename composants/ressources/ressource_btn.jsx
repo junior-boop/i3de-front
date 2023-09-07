@@ -15,7 +15,7 @@ export default function Ressource_btn(){
                     <IcOutlineAdd style = {{ width : 24, height : 24 }} />
                 </button>
             </Link>
-            <NotificationBtn />
+            {/* <NotificationBtn /> */}
         </div>
     )
 }

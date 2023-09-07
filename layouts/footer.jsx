@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { BiFacebook, BiLinkedin, BiYoutube } from "../composants/icons"
+import { BiFacebook, BiLinkedin, BiYoutube, QuillLoadingSpin } from "../composants/icons"
 import { useState } from "react"
 
 export default function Footer(){
@@ -78,9 +78,13 @@ export default function Footer(){
 
 function NewsLetter(){
     const [mail, setMail] = useState(' ')
+    const [btn_name, setBtn_name] = useState('Envoyer')
+    const [saving, setSaving] = useState(false)
 
 
     const handleSave = async () => {
+        setSaving(true)
+        setBtn_name("En cours d'envoie")
         const newsLetter = {
             mail : mail,
         } 
@@ -99,13 +103,25 @@ function NewsLetter(){
         });
 
         if(response.ok) {
-           setMail('')
+            setBtn_name("Envoyé! Merci!")
+            setTimeout(() => {
+                setSaving(false)
+                setBtn_name("Envoyer")
+                setMail('')
+            }, 2000)
         }
     }
     return (
         <div className="newsletter">
-            <input type="text" value={mail} onChange={({target}) => setMail(target.value)} />
-            <button onClick={handleSave}> Envoyer </button>
+            <input type="text" value={mail} onChange={({target}) => setMail(target.value)} placeholder="Notre Newsletter" />
+            <button className={saving && "valide"} onClick={handleSave}>
+            {
+                saving
+                ? <QuillLoadingSpin className = "w-6 h-6 loader" />
+                : null
+            }
+            {btn_name}
+            </button>
         </div>
     )
 }

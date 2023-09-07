@@ -38,8 +38,8 @@ export default async function ActualitesRoot(){
         <div>
             <Bannier name={'Blog'} />
             <Container>
-                <Titre titre={'Denières nouvelles'} className="font-semibold"/>
-                <div className="grid grid-cols-3 gap-3 mb-10 md:flex md:flex-col">
+                <Titre titre={'Dernières nouvelles'} className="font-semibold"/>
+                <div className="lg:grid grid-cols-3 gap-3 mb-10 flex flex-col">
                     {
                         liste
                     }
@@ -103,14 +103,14 @@ function Article({ titre, date, id, image}){
 
 
     return (
-        <Link href={'/blog/'+id} className="w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300 sm:flex">
+        <Link href={'/blog/'+id} className=" lg:block w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300 flex gap-2 flex-row-reverse">
             <div>
-                <div className="w-full aspect-[4/3] overflow-hidden rounded-xl">
+                <div className="w-32 lg:w-full aspect-square lg:aspect-[4/3] overflow-hidden rounded-xl">
                     <img src={`http://18.215.69.15:3000${image}`} alt="" className="w-full h-full object-cover object-center" />
                 </div>
             </div>
-            <div className="mt-3 mb-4">
-                <div className="text-3xl font-bold text-gray-800">
+            <div className="lg:mt-3 mb-4">
+                <div className="text-xl lg:text-3xl font-bold text-gray-800">
                     { titre }
                 </div>
                 <div className="text-gray-500 font-semibold">

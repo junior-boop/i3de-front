@@ -2966,12 +2966,21 @@ background-color: #f1f1f1;
    outline: transparent;
 }
 .newsletter button {
+    display: flex; gap: 8px;
     width: 25%;
     background-image: var(--btn-color);
     color: white;
     border: none;
-   outline: transparent;
-   font-weight: 600;
+    outline: transparent;
+    font-weight: 600;
+    position: relative;
+    z-index: 12;
+    transition: all .3s ease-in-out;
+    align-items: center;
+    justify-content: center;
+}
+.newsletter button.valide{
+    width: 100%;
 }
 .sociaux {
     width : 42px ;
