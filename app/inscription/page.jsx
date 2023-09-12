@@ -77,22 +77,23 @@ export default function Login(){
             pw : target[1].value,
         }
 
-        const userText = `mail=${target[0].value}&pw=${target[1].value}`
+        // const userText = `mail=${target[0].value}&pw=${target[1].value}`
 
         let headersList = {
             "Accept": "*/*",
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
            }
 
         try {
-            const reponse = await fetch("http://18.215.69.15:3000/api/inscription/login", {
+            const reponse = await fetch("/api/inscription/login", {
                 method : 'POST',
-                body : userText,
+                body : JSON.stringify(user),
                 headers : headersList
             })
 
             if(reponse.ok) {
                 const {key, value} = await reponse.json()
+                console.log(key, value);
                 const { name, surname, mail, pw, tel, town, like, share} = value
                 handleReduceLogIn({name, surname, mail, _id : key, pw})
                 

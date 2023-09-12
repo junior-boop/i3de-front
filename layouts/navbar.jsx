@@ -82,7 +82,7 @@ export default function NavBar(){
                                             <button onClick={() => setAvatarMenu(!avatarMenu)} style = {{outline : 'none'}} className="icon rounded-full aspect-square bg-special items-center justify-center w-12 flex items-center justify-center">
                                                 <OouiUserAvatar className = "text-white w-7" />
                                             </button>
-                                            <div style={{bottom : -132, right : -12,boxShadow : '0 5px 10px -5px #0005', visibility : avatarMenu ? 'visible' : 'hidden', overflow : "hidden", opacity : avatarMenu ? 1 : 0 }} className="absolute p-2 bg-white border border-gray-100 rounded-xl transition-all duration-300">
+                                            <div style={{bottom : -100, right : -12,boxShadow : '0 5px 10px -5px #0005', visibility : avatarMenu ? 'visible' : 'hidden', overflow : "hidden", opacity : avatarMenu ? 1 : 0 }} className="absolute p-2 bg-white border border-gray-100 rounded-xl transition-all duration-300">
                                                 <div>
                                                     {/* <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
                                                         Mon Compte

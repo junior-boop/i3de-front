@@ -6,14 +6,31 @@ export const GET = async () => {
 }
 
 export async function POST(request){
-    const { mail } = await request.json()
-    
+    const { mail, pw }  = await request.json();
     
     try { 
-        await connectToDB()
-        const userExist = await User.findOne({mail}).exec()
+        // const userText = `mail=${target[0].value}&pw=${target[1].value}`
+        const bodyContent = `mail=${mail}&pw=${pw}`
+        // let bodyContent = new FormData()
+        // bodyContent.append("mail", mail)
+        // bodyContent.append("pw", pw)
+        
+
+        let headersList = {
+            "Accept": "*/*",
+            "Content-Type": "application/x-www-form-urlencoded"
+           }
+
+        const connexion = await fetch("http://18.215.69.15:3000/api/inscription/login", {
+            method : 'POST',
+            body : bodyContent,
+            headers : headersList
+        })
+       
+        const userExist = await connexion.json()
+
         if(!userExist){
-            return new Response('user not exist', { status : 201})
+            return new Response('userExist', { status : 201})
         }
         return new Response(JSON.stringify(userExist), { status: 201 })
     } catch(error){

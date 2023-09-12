@@ -77,7 +77,7 @@ export default function Footer(){
 
 
 function NewsLetter(){
-    const [mail, setMail] = useState(' ')
+    const [mail, setMail] = useState('')
     const [btn_name, setBtn_name] = useState('Envoyer')
     const [saving, setSaving] = useState(false)
 
@@ -113,7 +113,7 @@ function NewsLetter(){
     }
     return (
         <div className="newsletter">
-            <input type="text" value={mail} onChange={({target}) => setMail(target.value)} placeholder="Notre Newsletter" />
+            <input type="text" value={mail} onChange={({target}) => setMail(target.value)} placeholder="Notre newsletter" />
             <button className={saving && "valide"} onClick={handleSave}>
             {
                 saving
