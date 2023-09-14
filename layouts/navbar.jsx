@@ -10,9 +10,6 @@ import { useGlobalContext } from "@/context/global_context";
 
 export default function NavBar(){
     const [visible, setVisible] = useState(false)
-    const [scroll, setScroll] = useState('absolute')
-    const [color, setColor] = useState('')
-    const {scrollY} = useScroll()
     const [userlocaldata, setuserLocalData] = useState({})
 
     const [name, setName] = useState('')
@@ -25,17 +22,7 @@ export default function NavBar(){
     const [userInfos, setUserInfos] = USERLOGININFO
     
 
-    useEffect(() => {
-        return scrollY.onChange((a) => {
-            a > 0 ? setScroll('fixed') : setScroll('absolute')
-        })
-    }, [scroll])
     
-    useEffect(() => {
-        return scrollY.onChange((a) => {
-            a > 0 ? setColor('color') : setColor('')
-        })
-    }, [])
 
     const getUsetInfos = async () => {
         const get = await userInfos
@@ -68,7 +55,7 @@ export default function NavBar(){
                         {
                             !isLogin
                             ? (<div>
-                                    <Link  href={'/inscription'}>
+                                    <Link  href={'/souscription'}>
                                         <button className="login_btn">S’inscrire</button>
                                     </Link>
                                 </div>)
@@ -116,13 +103,13 @@ export default function NavBar(){
 
     
     return(
-        <nav className={color} style =  {{ position : scroll}}>
+        <nav className={'color'} style =  {{ position : 'fixed'}}>
         <div className="container-fluid">
             <div className="navbar">
                 <div className="logo">
-                    <div>
+                    <Link href={'/'}>
                         <img src="/assets/icon/i3de_logo.png" width= {85}  alt="logo i3de" />
-                    </div>
+                    </Link>
                 </div>
                 <div className="icon-right flex gap-7">
                     {
@@ -190,14 +177,14 @@ export default function NavBar(){
                             </ul>
                         </div>
                         <div>
-                            <div className="content">
+                            <Link href={'/'} className="content">
                                 <div>
                                     <img src="/assets/icon/logo-cadre.png" width= '100%' height = "100%" />
                                 </div>
                                 <div>
                                     <h4 className="text-gradient">Impression 3D <br/> pour l{"'"}Education</h4>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                     </div>

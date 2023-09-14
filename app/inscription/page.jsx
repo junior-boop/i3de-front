@@ -34,8 +34,6 @@ export default function Login(){
                 tel : "+237"+target[3].value,
                 pw : target[4].value,
                 town : target[5].value,
-                like : [''],
-                share : [''],
             }
     
             let bodyContent = new FormData()
@@ -46,7 +44,7 @@ export default function Login(){
 
             try {
                 console.log(bodyContent.get('pw'))
-                const reponse = await fetch("http://18.215.69.15:3000/api/inscription/signin", {
+                const reponse = await fetch("/api/inscription/signup", {
                     method : 'POST',
                     body : bodyContent
                 })

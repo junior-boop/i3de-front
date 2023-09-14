@@ -14,7 +14,7 @@ export default function Partenaire(){
                         </div>
                         <div className="partenaire flex justify-content-center flex-wrap">
                             <Items url={'https://www.caysti.com/'}>
-                                <img src="./assets/prototype/Logo_caysti.svg" height={'100%'}/>
+                                <img src="./caysti.jfif" height={'100%'}/>
                             </Items>
                             <Items url={'https://www.manlab.ovh/'}>
                                 <img src="./assets/prototype/Manlab_logo.png" height = {'100%'} alt="" />

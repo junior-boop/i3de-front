@@ -1,21 +1,8 @@
-
-import Ressource from "@/models/ressources";
-import { connectToDB } from "@/utils/database";
-
-
 export async function GET(){
-    await connectToDB()
+    const response = await fetch('http://18.215.69.15:3000/api/ressources/', { cache : 'no-store' })
+    const data = await response.json()
 
-
-    try {
-
-        const ressource = await Ressource.find({})
-        // console.log(ressource)
-        return new Response(JSON.stringify(ressource), {status : 201})
-
-    } catch (reason) {
-        console.log(reason)
-        return new Response( 'il y a une erreur', {status : 500})
-    }
-
+    if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
+    console.log(data);
+    return new Response(JSON.stringify(data), { status : 201})
 }

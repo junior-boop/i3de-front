@@ -68,7 +68,7 @@ export default function Footer(){
 
             <section className="footer_section bg-special">
                 <p className="color-white px-3">
-                    Copyright &copy; 2022 All Rights Reserved By <a className="color-white" href="https://html.design/">CAYSTI Corp & MANLAB</a>
+                    Copyright &copy; 2022 All Rights Reserved By <a className="color-white" href="https://html.design/">CAYSTI & MANLAB</a>
                 </p>
             </section>
         </>

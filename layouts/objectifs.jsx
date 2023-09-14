@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Container from "../composants/container";
 import { AntDesignDeploymentUnitOutlined, CiBuilding, ClarityGroupLine } from "../composants/icons";
+import Link from "next/link";
 
 export default function Objectifs() {
     return(
@@ -26,11 +27,11 @@ export default function Objectifs() {
                            
                         </div>
                         <div className='bas'>
-                          <a href="https://docs.google.com/forms/d/e/1FAIpQLSf3sNWwXiGAMcfuz1i3YkKO8d-tNUNE5wKtKOejuE4HW2K7g/viewform?embedded=true">
+                          <Link href = '/ecole'>
                           <button>
                               Devenir une école bénéficiaire
                           </button>
-                          </a>
+                          </Link>
                         </div>
                         
                     </div>
