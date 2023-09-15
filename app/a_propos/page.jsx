@@ -20,7 +20,7 @@ export default function Apropos(){
                 <div className='secteur h-auto'>
                     <div className="desc">
                     <div className="mb-10">
-                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">C{"'"}est quoi le projet I3DE ?</div>
+                    <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1.5}} className="inline mb-10 text-5xl font-bold">C{"'"}est quoi <br/> le projet I3DE ?</div>
                     </div>
                         <div className="text-xl">
                         Le projet Impression 3D pour l{"'"}Éducation (I3DE) vise l’amélioration de la
@@ -62,7 +62,7 @@ export default function Apropos(){
                 </div>
             </section>
             <div id="Services">
-                <div className="mb-10 flex items-center justify-center">
+                <div className="mb-10 max-w-max px-4 mx-auto" style={{}}>
                     <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">Ce que nous Proposons</div>
                 </div>
                 
@@ -77,7 +77,7 @@ export default function Apropos(){
             <div className="py-44">
                 <Container>
                     <div className="mb-10 flex items-center justify-center">
-                        <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-6xl font-bold">Notre Equipe</div>
+                        <div style={{ backgroundImage : 'linear-gradient(to bottom, transparent 50%, #ff9fa2 50%)', boxDecorationBreak :'clone', lineHeight : 1}} className="inline mb-10 text-5xl font-bold">Notre Equipe</div>
                     </div>
                     <div className="flex flex-wrap gap-24  mb-14">
                         <div className="flex-1 aspect-[10/11] overflow-hidden rounded-2xl">

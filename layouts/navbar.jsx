@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { OouiUserAvatar, QuillEscape } from "@/composants/icons";
 import { useGlobalContext } from "@/context/global_context";
+import  { useRouter } from 'next/navigation'
 
 
 export default function NavBar(){
@@ -22,7 +23,7 @@ export default function NavBar(){
     const {isLogin, setIsLogin} = LOGINCONTEXT
     const [userInfos, setUserInfos] = USERLOGININFO
     
-
+    const router = useRouter()
     
 
     const getUsetInfos = async () => {
@@ -51,6 +52,7 @@ export default function NavBar(){
         setTimeout(() => {
             handleReduceLogOut()
             setDeconnexion(false)
+            router.replace('/inscription')
         }, 1000)
     }
 
@@ -168,10 +170,10 @@ export default function NavBar(){
                                         )
                                         : (<div>
                                                 <hr />
-                                                <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
+                                                <Link href={'/profils'} className="py-2 block  mb-2 font-bold">
                                                     Mon Compte
                                                 </Link>
-                                                <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
+                                                <Link href={'/profils'} className="py-2 block  mb-2 font-bold">
                                                     Mes activitéss
                                                 </Link>
                                                 
