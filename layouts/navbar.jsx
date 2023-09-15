@@ -15,6 +15,7 @@ export default function NavBar(){
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [avatarMenu, setAvatarMenu] = useState(false)
+    const [deconnexion, setDeconnexion] = useState(false)
 
     const {LOGINCONTEXT, USERLOGININFO, handleReduceLogOut } = useGlobalContext()
 
@@ -45,6 +46,14 @@ export default function NavBar(){
 
     const handleVisibility = () => setVisible(!visible)
     
+    const handledeconnexion = () => {
+        setDeconnexion(true)
+        setTimeout(() => {
+            handleReduceLogOut()
+            setDeconnexion(false)
+        }, 1000)
+    }
+
 
     const DonVisible = () => {
         if(typeof window !== 'undefined'){
@@ -69,18 +78,15 @@ export default function NavBar(){
                                             <button onClick={() => setAvatarMenu(!avatarMenu)} style = {{outline : 'none'}} className="icon rounded-full aspect-square bg-special items-center justify-center w-12 flex items-center justify-center">
                                                 <OouiUserAvatar className = "text-white w-7" />
                                             </button>
-                                            <div style={{bottom : -100, right : -12,boxShadow : '0 5px 10px -5px #0005', visibility : avatarMenu ? 'visible' : 'hidden', overflow : "hidden", opacity : avatarMenu ? 1 : 0 }} className="absolute p-2 bg-white border border-gray-100 rounded-xl transition-all duration-300">
+                                            <div style={{bottom : -135, right : -12,boxShadow : '0 5px 10px -5px #0005', visibility : avatarMenu ? 'visible' : 'hidden', overflow : "hidden", opacity : avatarMenu ? 1 : 0 }} className="absolute p-2 bg-white border border-gray-100 rounded-xl transition-all duration-300">
                                                 <div>
-                                                    {/* <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
+                                                    <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
                                                         Mon Compte
                                                     </Link>
                                                     <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
                                                         Mes activités
-                                                    </Link> */}
-                                                    <Link style={{width : 200}} href={'/don'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
-                                                        Faire un don
                                                     </Link>
-                                                    <button onClick={() => handleReduceLogOut()} className="py-2 px-3 bg-special rounded-lg text-white font-semibold w-full justify-start text-right">
+                                                    <button onClick={handledeconnexion} className="py-2 px-3 bg-special rounded-lg text-white font-semibold w-full justify-start text-right">
                                                         Se déconnecter
                                                     </button>
                                                 </div>
@@ -103,7 +109,8 @@ export default function NavBar(){
 
     
     return(
-        <nav className={'color'} style =  {{ position : 'fixed'}}>
+        <>
+            <nav className={'color'} style =  {{ position : 'fixed'}}>
         <div className="container-fluid">
             <div className="navbar">
                 <div className="logo">
@@ -145,7 +152,9 @@ export default function NavBar(){
                                 <li onClick={handleVisibility}><Link href="/blog">Blog</Link></li>
                                 <li onClick={handleVisibility}><Link href="/a_propos">A Propos</Link></li>
                                 <li onClick={handleVisibility}><Link href="/faq">FAQ</Link></li>
-                                {/* <li onClick={handleVisibility}><Link href="/contact-us">Contactez-nous</Link></li> */}
+                                <li onClick={handleVisibility}><Link href="/don">Faire un don</Link></li>
+                                
+                                <li onClick={handleVisibility}><Link href="/contact-us">Contactez-nous</Link></li>
                                
                                     
                                     {
@@ -159,16 +168,14 @@ export default function NavBar(){
                                         )
                                         : (<div>
                                                 <hr />
-                                                {/* <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
+                                                <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
                                                     Mon Compte
                                                 </Link>
                                                 <Link href={'/profils'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
                                                     Mes activitéss
-                                                </Link> */}
-                                                <Link href={'/don'} className="py-2 block hover:bg-gray-300 mb-2 font-bold">
-                                                    Faire un don
                                                 </Link>
-                                                <button style={{width : 'max-content', borderRadius : 7}} className="bg-special px-4 flex-col py-3 rounded-[7px] w-max text-white font-bold">
+                                                
+                                                <button onClick={handledeconnexion}  style={{width : 'max-content', borderRadius : 7}} className="bg-special px-4 flex-col py-3 rounded-[7px] w-max text-white font-bold">
                                                         Se déconnecter
                                                 </button>
                                             </div>
@@ -192,6 +199,19 @@ export default function NavBar(){
             </div>
         </div>
     </nav>
+        {
+            deconnexion ?
+            (
+                <div className="fixed w-full h-[100vh] z-[2000] flex items-center justify-center flex-col" style={{backgroundColor : "#fff7"}}>
+                    <img src="./load.gif" alt="" className="w-24 h-24" />
+                    <div className = 'text-lg font-bold'>
+                        Processus de déconnexion ...
+                    </div>
+                </div>
+            ) 
+            : null
+        }
+    </>
     )
 }
 

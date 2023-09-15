@@ -42,17 +42,24 @@ export default function Login(){
                 bodyContent.append(key, user[key])
             }
 
+            let headersList = {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+               }
+
             try {
-                console.log(bodyContent.get('pw'))
                 const reponse = await fetch("/api/inscription/signup", {
                     method : 'POST',
-                    body : bodyContent
+                    headers : headersList,
+                    body : JSON.stringify(user)
                 })
     
                 if(reponse.ok) {
-                    const {name, surname, mail, _id, pw, tel, town, like, share} = await reponse.json()
-                    setUserInfos({name, surname, mail, _id, pw, tel, town, like, share})
-                    handleReduceLogIn({name, surname, mail, _id})
+                    const {name, surname, mail, pw, tel, town, key} = await reponse.json()
+                
+                    // const { name, surname, mail, pw, tel, town, like, share} = value
+                    setUserInfos({name, surname, mail, _id : key, pw, tel, town})
+                    handleReduceLogIn({name, surname, mail, _id : key})
                     setIsLogin(true)
                     // router.back()
                 }
@@ -74,8 +81,6 @@ export default function Login(){
             mail : target[0].value,
             pw : target[1].value,
         }
-
-        // const userText = `mail=${target[0].value}&pw=${target[1].value}`
 
         let headersList = {
             "Accept": "*/*",

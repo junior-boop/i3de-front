@@ -27,14 +27,12 @@ function Global_context_Provider({children}){
     const handleUser = async (data) => {
 
         try {
-            const response = await fetch("http://18.215.69.15:3000/api/inscription/" + data.key, { cache : "no-store"})
+            const response = await fetch("/api/inscription/" + data.key, { cache : "no-store"})
             const responseJson = await response.json()
-            console.log(responseJson)
 
-            const {name, surname, mail, pw, tel, town, key} = responseJson
+            const {name, surname, mail, pw, tel, town, _id} = responseJson
             if(response.ok) {
-                setUserInfos({name, surname, mail, pw, tel, town, _id : key})
-
+                setUserInfos({name, surname, mail, pw, tel, town, _id})
             }
         } catch (error) {
             console.log(error)

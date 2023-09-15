@@ -45,21 +45,6 @@ export default async function ActualitesRoot(){
                     }
                 </div>
 
-                {/* <div className="flex item-center gap-4 mb-6 justify-center">
-                    <div>
-                        <button className="w-11 h-11 rounded-full flex items-center justify-center bg-special">
-                            <QuillChevronLeft className = "w-6 h-6 text-white" />
-                        </button>
-                    </div>
-                    <div className="flex items-center font-semibold text-xl">
-                        1 sur 1
-                    </div>
-                    <div>
-                        <button className="w-11 h-11 rounded-full flex items-center justify-center bg-special">
-                            <QuillChevronRight className = "w-6 h-6 text-white" />
-                        </button>
-                    </div>
-                </div> */}
             </Container>
         </div>
     )
