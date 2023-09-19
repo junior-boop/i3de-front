@@ -8,7 +8,7 @@ export default async function  RessourceField({data}){
 
     return(
         <div className="column">
-            {data.map((el, key) => <ImageItem key={key} data = {el} id={el.key}  />)}
+            {data.map((el, key) => <ImageItem key={el.key} data = {el} id={el.key} />)}
         </div>
     )
 }

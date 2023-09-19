@@ -1,11 +1,10 @@
-'use client'
-import { RiSearchLine } from "../icons"
+
 import RessourceField from "./data_ressource"
-import { useState } from "react"
+import Link from "next/link"
+import InputSearch from "./inputSearch"
 
 export default function Ressources_client({data}){
 
-    const [searchState, setSearchState]= useState('tout')
 
     return (
         <div className="ressource">
@@ -14,10 +13,10 @@ export default function Ressources_client({data}){
                             <InputSearch placeholder={'Rechercher une ressource'} />
                         <h5 style = {{marginBottom : 12}} className="px-2">Filtre</h5>
                         <div>
-                            <ListElement onClick={() => setSearchState('tout')} titre = 'Tous les éléments' />
-                            <ListElement onClick={() => setSearchState('fiche pedagogique')} titre = 'Fiches pédagogiques'/>
-                            <ListElement onClick={() => setSearchState('Modeles 3D')} titre = 'Modèles 3D' />
-                            <ListElement onClick={() => setSearchState('realisation')} titre = 'Quelques exemples' />
+                            <ListElement href="/ressource?search=tout" titre = 'Tous les éléments' />
+                            <ListElement href="/ressource?search=pedagogique" titre = 'Fiches pédagogiques'/>
+                            <ListElement href="/ressource?search=modele" titre = 'Modèles 3D' />
+                            <ListElement href="/ressource?search=exemple" titre = 'Quelques exemples' />
                         </div>
 
                     </div>
@@ -26,23 +25,14 @@ export default function Ressources_client({data}){
     )
 }
 
-function ListElement({titre, onClick}){
+function ListElement({titre, href = '/'}){
     return(
-        <div onClick={onClick} className="listeElement hover:bg-slate-200 px-2">
+        <Link href={href} replace = {true} className="listeElement hover:bg-slate-200 px-2 block">
            {titre}
-        </div>
+        </Link>
     )
 } 
 
-function InputSearch({ value, onChange, placeholder}){
-    return(
-        <div className="inputBase">
-            <input type="text" value={value} onChange={onChange} placeholder={placeholder} />
-            <div className="icon">
-                <RiSearchLine style = {{ width : 20, hieght : 20, color : 'white'}}/>
-            </div>
-        </div>
-    )
-}
+
 
 

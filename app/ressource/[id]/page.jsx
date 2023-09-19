@@ -5,6 +5,7 @@ import { BxsLike, MaterialSymbolsCloudDownloadRounded, MdiShare, QuillArrowLeft,
 import { useEffect, useState } from "react"
 import {useRouter} from "next/navigation"
 import { useGlobalContext } from "@/context/global_context"
+import Link from "next/link"
 
 export default function HandleRessource({params}){
 
@@ -46,9 +47,9 @@ export default function HandleRessource({params}){
                     <Container style={{display : 'flex', height : 56, orderBotttom : "1px solid silver", flexDirection : 'column', gap : 16}} >
                         <div>
                             <div className="flex gap-4 items-center">
-                                <button className="bg-gray-100 w-12 h-12 rounded-full flex items-center justify-center" onClick={() => router.back()} >
+                                <Link href={'/ressource'} className="bg-gray-100 w-12 h-12 rounded-full flex items-center justify-center"  >
                                     <QuillArrowLeft className = "w-7 h-7"  />
-                                </button>
+                                </Link>
                                 <span className="font-bold">
                                     Back
                                 </span>
@@ -152,8 +153,8 @@ function Slider({images}){
 
     const ListeDote = () => {
         const listedote = images.map((el, key) => {
-            if(position === key) return <Dote active={true} />
-            else return <Dote active={false} />
+            if(position === key) return <Dote active={true} key={key} />
+            else return <Dote active={false} key={key} />
         })
 
         return listedote

@@ -13,8 +13,9 @@ const getData = async () => {
     return data
 }
 
-export default async function RessourcePage(){    
-     
+export default async function RessourcePage({searchParams}){    
+    
+    console.log(searchParams)
     const Data = await getData()
 
     return(

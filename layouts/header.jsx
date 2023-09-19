@@ -1,17 +1,8 @@
-'use client';
-
 import Image from 'next/image'
-import { useRef, useState } from 'react'
 
 
 export default function Header(){
-    const [second, setSecond] = useState('logo_anime')
-    const ref = useRef()
-
-    setTimeout(() => {
-        setSecond('logo_anime start')
-    }, 2000)
-
+    
     
     return(
         <header style={{backgroundImage : `url(./assets/images/center_2.jpg)`}}>

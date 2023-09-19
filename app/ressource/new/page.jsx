@@ -1,7 +1,7 @@
 import Container from "@/composants/container";
 import New_Ressource from "@/composants/ressources/newRessource";
 
-export default function NewRessource() {
+export default async function NewRessource() {
     return (
         <section id='newRessource'>
             <div style={{borderBottom : "1px solid #f1f1f1", marginBottom : 12}}>

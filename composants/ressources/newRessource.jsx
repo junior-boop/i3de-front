@@ -12,9 +12,7 @@ import moment from "moment/moment";
 export default function New_Ressource(){
 
     const [base64, setBase64] = useState([]);
-    const [images, setImages] = useState([])
     const [titre, setTitre] = useState('')
-    const [count, setCount] = useState(0)
     const [description, setDescription] = useState('')
     const [categorie, setCategorie] = useState('')
     const [save, setSave] = useState(false)
@@ -65,7 +63,6 @@ export default function New_Ressource(){
 
         if(response.ok) {
             const images = await response.json()
-            console.log(images)
             handlePublication(images)
         }
         
@@ -120,26 +117,7 @@ export default function New_Ressource(){
                alert("Remplissez tous les champs avant de sauvegader")
                Route.refresh()
            }
-
-           console.log('ville')
     }
-   
-
-    // useEffect(() => {
-    //     console.log(images.length, base64.length)
-    //     if(images.length > 0 && images.length === base64.length){
-    //         console.log('ville, 1')
-    //        handlePublication()
-    //     }
-    // }, [images])
-
-    // save
-   
-
-
-    // useEffect(() => {
-    //     base64.length !== 0 ? base64 : []
-    // }, [base64, save])
 
     useEffect(() => {
         if(save){
@@ -148,7 +126,7 @@ export default function New_Ressource(){
                 setSave(false)
                 setBtn_name("Enregisté")
                 setTimeout(() => {
-                    Route.back()
+                    Route.replace('/ressource')
                 }, 1000)
             }, 3000)
     
