@@ -11,7 +11,7 @@ const getData = async (searchParams) => {
 
     if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
     
-    return data
+    return data.reverse();
 }
 
 export default async function RessourcePage({searchParams}){    

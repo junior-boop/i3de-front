@@ -126,7 +126,8 @@ export default function New_Ressource(){
                 setSave(false)
                 setBtn_name("Enregisté")
                 setTimeout(() => {
-                    Route.replace('/ressource')
+                    Route.push('/ressource')
+                    // Route.replace('/ressource')
                 }, 1000)
             }, 3000)
     
