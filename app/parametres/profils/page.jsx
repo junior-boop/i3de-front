@@ -3,7 +3,9 @@ import Link from "next/link";
 import Titre from "@/composants/titre";
 import UserInfos from "@/layouts/user_modif";
 
-
+const getData = async () => {
+    const resquest = await fetch('')
+}
 
 export default function Profils(){
     return(

@@ -1,10 +1,7 @@
 'use client'
 import ImageItem from "./image_item";
 
-
-
-
-export default async function  RessourceField({data}){
+export default function  RessourceField({data}){
 
     return(
         <div className="column">

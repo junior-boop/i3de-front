@@ -82,10 +82,10 @@ export default function NavBar(){
                                             </button>
                                             <div style={{bottom : -135, right : -12,boxShadow : '0 5px 10px -5px #0005', visibility : avatarMenu ? 'visible' : 'hidden', overflow : "hidden", opacity : avatarMenu ? 1 : 0 }} className="absolute p-2 bg-white border border-gray-100 rounded-xl transition-all duration-300">
                                                 <div>
-                                                    <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
+                                                    <Link style={{width : 200}} href={'/parametres/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
                                                         Mon Compte
                                                     </Link>
-                                                    <Link style={{width : 200}} href={'/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
+                                                    <Link style={{width : 200}} href={'/parametres/profils'} className="block py-2 px-2 hover:bg-slate-200  rounded-lg mb-2 text-right">
                                                         Mes activités
                                                     </Link>
                                                     <button onClick={handledeconnexion} className="py-2 px-3 bg-special rounded-lg text-white font-semibold w-full justify-start text-right">
@@ -169,15 +169,15 @@ export default function NavBar(){
                                             </button>
                                         )
                                         : (<div>
-                                                <hr />
-                                                <Link href={'/profils'} className="py-2 block  mb-2 font-bold">
+                                                <hr className="my-3" />
+                                                <Link href={'/parametres/profils'} className="py-2 block  mb-2 font-bold">
                                                     Mon Compte
                                                 </Link>
-                                                <Link href={'/profils'} className="py-2 block  mb-2 font-bold">
+                                                <Link href={'parametres/profils'} className="py-2 block  mb-2 font-bold">
                                                     Mes activitéss
                                                 </Link>
                                                 
-                                                <button onClick={handledeconnexion}  style={{width : 'max-content', borderRadius : 7}} className="bg-special px-4 flex-col py-3 rounded-[7px] w-max text-white font-bold">
+                                                <button onClick={handledeconnexion}  style={{width : 'max-content', borderRadius : 7}} className="bg-special px-4 flex-col py-3 rounded-[7px] w-max text-white font-bold mt-3">
                                                         Se déconnecter
                                                 </button>
                                             </div>
