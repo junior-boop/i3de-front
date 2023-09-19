@@ -6,17 +6,17 @@ import { useEffect } from "react"
 export default function ImageItem({data, onClick, id}){
     const { categorie, createdAt, createdBy, images, description, titre, like } = data?.value
 
-    const imagesFunc  = () => {
-        const tb = []
-        const imagesFormats = images?.replace(/\[|\]/g, '')
-        const dataIMage = imagesFormats?.split(',')
+    // const imagesFunc  = () => {
+    //     const tb = []
+    //     const imagesFormats = images?.replace(/\[|\]/g, '')
+    //     const dataIMage = imagesFormats?.split(',')
 
-        dataIMage?.forEach(element => {
-            tb.push(element.replace(/\"/g, ''))
-        });
+    //     dataIMage?.forEach(element => {
+    //         tb.push(element.replace(/\"/g, ''))
+    //     });
         
-        return tb
-    }
+    //     return tb
+    // }
     
     
     useEffect(() => {
@@ -40,7 +40,7 @@ export default function ImageItem({data, onClick, id}){
     return(
         <div className="ImageItem" >
             <div className="col-12 p-0 image" style={{ cursor : 'pointer', position : 'relative', overflow : 'hidden'}}>
-                <img src={imagesFunc().length > 0 ? `http://18.215.69.15:3000${imagesFunc()[0]}` : ''} width={'100%'}  alt = {'imagegroup'} />  
+                <img src={images.length > 0 ? `http://18.215.69.15:3000${images[0]}` : ''} width={'100%'}  alt = {'imagegroup'} />  
                 <div className="little_menu">
                     <Button icon={<BxsLike style = {{ width : 20, hieght : 20}} />}  />
                     {/* <Button icon={<MaterialSymbolsCloudDownloadRounded style = {{ width : 20, hieght : 20}} />}/> */}

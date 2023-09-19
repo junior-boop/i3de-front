@@ -2,7 +2,6 @@
 
 import Container from "@/composants/container"
 import { BxsLike, MaterialSymbolsCloudDownloadRounded, MdiShare, QuillArrowLeft, QuillChevronLeft, QuillChevronRight, QuillLoadingSpin } from "@/composants/icons"
-// import Link from "next/link"
 import { useEffect, useState } from "react"
 import {useRouter} from "next/navigation"
 import { useGlobalContext } from "@/context/global_context"
@@ -21,6 +20,7 @@ export default function HandleRessource({params}){
         (async () => {
             const response = await fetch('http://18.215.69.15:3000/api/ressources/'+id)
             const data = await response.json()
+            console.log(data);
             setData({...data})
         })()
     }, [])
@@ -58,7 +58,7 @@ export default function HandleRessource({params}){
                 </div>
                     <Container cName="flex gap-7">
                         <div className="card-ressource aspect-square mb-40 rounded-2xl">
-                            <Slider images={Data.images} />
+                            <Slider images={Data?.images} />
 
                         </div>
                         <div className="card-ressource flex-1 p-4 flex flex-col justify-between rounded-2xl">
@@ -126,18 +126,20 @@ export default function HandleRessource({params}){
 
 function Slider({images}){
 
-    const imagesFunc  = () => {
-        const tb = []
-        const imagesFormats = images?.replace(/\[|\]/g, '')
-        const dataIMage = imagesFormats?.split(',')
+    console.log(images)
 
-        dataIMage?.forEach(element => {
-            tb.push(element.replace(/\"/g, ''))
-        });
+    // const imagesFunc  = () => {
+    //     const tb = []
+    //     const imagesFormats = images?.replace(/\[|\]/g, '')
+    //     const dataIMage = imagesFormats?.split(',')
+
+    //     dataIMage?.forEach(element => {
+    //         tb.push(element.replace(/\"/g, ''))
+    //     });
         
-        return tb
-    }
-    const imagesParse = imagesFunc()
+    //     return tb
+    // }
+    // const imagesParse = imagesFunc()
     const [position, setPosition] = useState(0)
 
 
@@ -149,7 +151,7 @@ function Slider({images}){
     }
 
     const ListeDote = () => {
-        const listedote = imagesParse.map((el, key) => {
+        const listedote = images.map((el, key) => {
             if(position === key) return <Dote active={true} />
             else return <Dote active={false} />
         })
@@ -158,8 +160,8 @@ function Slider({images}){
     }
 
     const imgsrc = () => {
-        if(imagesParse[position] !== undefined){
-            return 'http://18.215.69.15:3000'+imagesParse[position]
+        if(images !== undefined && images[position] !== undefined){
+            return 'http://18.215.69.15:3000'+images[position]
         } else return '/assets/images/photo-19jpg'
     }
 
@@ -167,8 +169,8 @@ function Slider({images}){
 
     useEffect(() => {
         console.log(imgsrc())
-        if(position > imagesParse.length - 1) setPosition(0)
-        if(position < 0) setPosition(imagesParse.length-1)
+        if(position > images?.length - 1) setPosition(0)
+        if(position < 0) setPosition(images?.length-1)
     }, [position])
 
     const CheckUndefine = () => {

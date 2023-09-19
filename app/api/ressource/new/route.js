@@ -1,31 +1,27 @@
-import { connectToDB } from "@/utils/database";
-import Ressource from "@/models/ressources";
-
-
 export function GET(){
     return new Response('je suis une nouvelle ressource', {status : 201})
 }
 
 export async function POST(request) {
-    const {images, titre, description, createdAt, createdBy, categorie, like, share, download} = await request.json()
+    const publication = await request.json()
 
-    const { name, surname, user_id } = createdBy
+    const  headersList = {
+        "Accept": "*/*",
+        "Content-Type": "application/json"
+       }
 
-    try {
-        const ressource = await new  Ressource({
-            images, titre, description, createdAt, categorie, like, share, download, 
-            createdBy : {
-                name, surname, user_id
-            }
-        })
+       console.log(publication)
 
-        console.log(ressource)
+    let response = await fetch("http://18.215.69.15:3000/api/ressources", { 
+        method: "POST",
+        body: JSON.stringify(publication),
+        headers: headersList
+    });
 
-        await ressource.save()
-
-    } catch ( reason ){
-        console.log(reason)
+    if(response.ok) {
+        console.log('je vais bien')
+        return new Response(await response.json(), {status : 201} )
+    } else {
+        return new Response('ville vide', {status : 501} )
     }
-    
-    return new Response(JSON.stringify(), {status : 201} )
 }

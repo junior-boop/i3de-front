@@ -1,30 +1,30 @@
-import Image from "@/models/images"
-import { connectToDB } from "@/utils/database"
-
 export const GET = async () => {
-    try {
-        await connectToDB()
-        const images = await Image.find({}).populate('name')
-        console.log(images)
-        return new Response(JSON.stringify(images), {status : 201})
-    } catch (error) {
-        console.log(error)
-    }
 
+    return new Response('je vasi voir apres')
 }
 
 export const POST =  async (request) => {
-    const {name, code_hex, mineType} = await request.json()
-    try {
-        await connectToDB()
-        const newImage = new Image({
-            name , code_hex, mineType
-        })
 
-        await newImage.save()
+    const  headersList = {
+        "Accept": "*/*",
+        }
 
-        return new Response(JSON.stringify(newImage), {status : 201})
-    } catch (error) {
-        console.log(error)
+    const images = await request.formData()
+    console.log(images)
+
+    let response = await fetch("http://18.215.69.15:3000/api/images", { 
+        method: "POST",
+        body: images,
+        headers: headersList
+    });
+
+    if(response.ok) {
+        const res = await response.json()
+        return new Response(JSON.stringify(res), { status : 201})
+    } else {
+    return new Response('il y a une erreur dans le server', { status : 501})
+
     }
 }
+
+// "http://18.215.69.15:3000/api/images"

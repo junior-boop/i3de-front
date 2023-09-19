@@ -48,33 +48,26 @@ export default function New_Ressource(){
         }
     };
 
-    const HandleSubmit =() => {
+    const HandleSubmit = async () => {
         setSave(true)
-        base64.map(
-            async (el) => {
-
-            const bodyContent = new FormData()
+        const bodyContent = new FormData()
+        const  headersList = {
+            "Accept": "*/*",
+           }
+        base64.forEach((el) => {
             bodyContent.append('image', el.image_target)
-
-            const  headersList = {
-                "Accept": "*/*",
-               }
-
-            let response = await fetch("http://18.215.69.15:3000/api/images", { 
-                method: "POST",
-                body: bodyContent,
-                headers: headersList
-            });
-
-            if(response.ok) {
-                const images = await response.json()
-                console.log(images)
-                setImages(el => [...el, images[0]])
-            }
-            
         })
-        
-        setCount(base64.length)
+        let response = await fetch("/api/images", { 
+            method: "POST",
+            body: bodyContent,
+            headers: headersList
+        });
+
+        if(response.ok) {
+            const images = await response.json()
+            console.log(images)
+            handlePublication(images)
+        }
         
     };
 
@@ -85,11 +78,11 @@ export default function New_Ressource(){
 
 
     
-    const handlePublication = () => {
+    const handlePublication = (album_images) => {
         if(titre.length !== 0 && description.length !== 0 && categorie.length !== 0){
 
             let publication = {
-                images : JSON.stringify(images), 
+                images : album_images, 
                 titre : titre,
                 description : description, 
                 createdAt : new Date(),
@@ -111,7 +104,7 @@ export default function New_Ressource(){
                     "Content-Type": "application/json"
                    }
     
-                let response = await fetch("http://18.215.69.15:3000/api/ressources", { 
+                let response = await fetch("/api/ressource/new", { 
                     method: "POST",
                     body: JSON.stringify(publication),
                     headers: headersList
@@ -132,21 +125,21 @@ export default function New_Ressource(){
     }
    
 
-    useEffect(() => {
-        console.log(images.length, base64.length)
-        if(images.length > 0 && images.length === base64.length){
-            console.log('ville, 1')
-           handlePublication()
-        }
-    }, [images])
+    // useEffect(() => {
+    //     console.log(images.length, base64.length)
+    //     if(images.length > 0 && images.length === base64.length){
+    //         console.log('ville, 1')
+    //        handlePublication()
+    //     }
+    // }, [images])
 
     // save
    
 
 
-    useEffect(() => {
-        base64.length !== 0 ? base64 : []
-    }, [base64, save])
+    // useEffect(() => {
+    //     base64.length !== 0 ? base64 : []
+    // }, [base64, save])
 
     useEffect(() => {
         if(save){
