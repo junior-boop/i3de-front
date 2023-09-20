@@ -6,13 +6,10 @@ import { useGlobalContext } from "@/context/global_context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import useFirebase from "@/firebase/firebase";
-import { ref, set } from "firebase/database";
 
 export default function Login(){
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(true)
     const [isLoaded, setIsloaded] = useState(false)
-    const { Database } = useFirebase()
 
     const { handleReduceLogIn, LOGINCONTEXT, USERLOGININFO } = useGlobalContext()
     const {isLogin, setIsLogin} = LOGINCONTEXT
@@ -61,7 +58,7 @@ export default function Login(){
                     setUserInfos({name, surname, mail, _id : key, pw, tel, town})
                     handleReduceLogIn({name, surname, mail, _id : key})
                     setIsLogin(true)
-                    // router.back()
+                    router.replace('/ressource')
                 }
             } catch (error) {
                 console.log(error, 1)
@@ -104,7 +101,7 @@ export default function Login(){
                     setUserInfos({name, surname, mail, _id : key, pw, tel, town, like, share})
                     setIsloaded(true)
                     setIsLogin(true)
-                    router.back()
+                    router.replace('/ressource')
                 }, 3000)
             }
         } catch (error) {
@@ -230,22 +227,22 @@ const SignUp_Space = ({ onSubmit }) => {
          <div className="login_space">
             <form onSubmit={onSubmit}>
                 <div className="champ">                    
-                    <input type="text"  placeholder="Votre Nom" />
+                    <input type="text"  placeholder="Votre Nom" required/>
                 </div>
                 <div className="champ">                    
-                    <input type="text"  placeholder="Votre Prenom" />
+                    <input type="text"  placeholder="Votre Prenom" required/>
                 </div>
                 <div className="champ">                    
-                    <input type="email" name="email" placeholder="Votre Adresse e-mail" />
+                    <input type="email" name="email" placeholder="Votre Adresse e-mail" required/>
                 </div>
                 <div className="champ">                    
-                    <input type="tel" name="telephone" placeholder="Votre numero de telephone" />
+                    <input type="tel" name="telephone" placeholder="Votre numero de telephone" required/>
                 </div>
                 <div className="champ">                    
-                    <input type="password" name="password" placeholder="Votre mot de passe" />
+                    <input type="password" name="password" placeholder="Votre mot de passe" required/>
                 </div>
                 <div className="champ relative">                    
-                    <input type="text" name="password" value={town} readOnly/>
+                    <input type="text" name="password" value={town} readOnly required/>
                     <div data-rotate = {tiroir} className="btn_tiroir absolute w-10 h-10 rounded-full bg-white border border-gray-400 flex items-center justify-center outline-none" onClick={() => setTiroir(!tiroir)}>
                         <QuillChevronRight  className = 'w-6' />
                     </div>
@@ -274,10 +271,10 @@ const Login_Space = ({onSubmit}) => {
          <div className="login_space">
             <form onSubmit={onSubmit}>
                 <div className="champ">                    
-                    <input type="email" name="email" placeholder="Votre Adresse e-mail" />
+                    <input type="email" name="email" placeholder="Votre Adresse e-mail" required/>
                 </div>
                 <div className="champ">                    
-                    <input type="password" name="password" placeholder="Votre mot de passe" />
+                    <input type="password" name="password" placeholder="Votre mot de passe" required/>
                 </div>
                 <button type="submit">Se connecter </button> 
             </form>

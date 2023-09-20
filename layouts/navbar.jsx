@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { OouiUserAvatar, QuillEscape } from "@/composants/icons";
 import { useGlobalContext } from "@/context/global_context";
-import  { useRouter } from 'next/navigation'
+import  { useRouter, usePathname } from 'next/navigation'
 
 
 export default function NavBar(){
@@ -24,7 +24,9 @@ export default function NavBar(){
     const [userInfos, setUserInfos] = USERLOGININFO
     
     const router = useRouter()
+    const pathname = usePathname()
     
+    console.log(pathname)
 
     const getUsetInfos = async () => {
         const get = await userInfos
@@ -59,10 +61,10 @@ export default function NavBar(){
 
     const DonVisible = () => {
         if(typeof window !== 'undefined'){
-            if(window.location.pathname !== '/dons'){
+            if(pathname !== '/souscription' ){
+                console.log( true)
                 return (
                     <>
-
                         {
                             !isLogin
                             ? (<div>
@@ -162,11 +164,18 @@ export default function NavBar(){
                                     {
                                         !isLogin 
                                         ? (
-                                            <button style={{border : '3px solid var(--bg-color-orange)', borderRadius : 10, padding : '7px 20px', backgroundColor : 'transparent', margin : '12px 0', color : 'var(--bg-color-orange-rouge)', fontWeight :'700'}}>
-                                                <Link href={'/inscription'} >
-                                                    Inscrivez-vous
-                                                </Link>
-                                            </button>
+                                            <>
+                                                <button style={{border : '3px solid var(--bg-color-orange)', borderRadius : 10, padding : '7px 20px', backgroundColor : 'transparent', margin : '12px 0', color : 'var(--bg-color-orange-rouge)', fontWeight :'700',}}>
+                                                    <Link href={'/souscription'} >
+                                                        Inscrivez-vous
+                                                    </Link>
+                                                </button>
+                                                <button style={{border : '3px solid var(--bg-color-orange)', borderRadius : 10, padding : '7px 20px', backgroundColor : 'transparent', margin : '12px 0', color : 'var(--bg-color-orange-rouge)', fontWeight :'700'}}>
+                                                    <Link href={'/inscription'} >
+                                                        Connectez-vous
+                                                    </Link>
+                                                </button>
+                                            </>
                                         )
                                         : (<div>
                                                 <hr className="my-3" />

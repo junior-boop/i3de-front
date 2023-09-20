@@ -12,19 +12,12 @@ const getData = async () => {
 
     if(!response.ok) throw new Error('il y a une errreur dans le transfert')
 
-    return data
+    return data.reverse();
 }
 
 
 export default async function ActualitesRoot(){
 
-    // const Data = await getData()
-    // console.log(Data[1].value)
-
-    // const liste = Data.map(el => {
-    //     const { key, images, titre, createdAt } = el.value.Item
-    //     return <Article image={images[0]} id={key} titre={titre} key={key}/>
-    // })
     const data = await getData()
 
     const liste = data.map((el, key) => {

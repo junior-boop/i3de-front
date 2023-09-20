@@ -26,7 +26,7 @@ export default async function RessourcePage({searchParams}){
             </Bannier_second>
             <section id = 'ressource'>
             <Container>
-                <Ressources_client data = {Data} params = {searchParams.search} />
+                <Ressources_client data = {Data} params = {searchParams} />
             </Container>
             </section>
             
