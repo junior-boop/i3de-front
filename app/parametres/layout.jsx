@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
             <div className="ressource">
                         <div className="option">
                             <div>
-                                <ListElement url={'/paramettres/profils'} titre = 'Profils' />
-                                <ListElement url={'/paramettres/activites'} titre = 'Activités'/>
+                                <ListElement url={'/parametres/profils'} titre = 'Profils' />
+                                <ListElement url={'/parametres/activites'} titre = 'Activités'/>
                             </div>
 
                         </div>
