@@ -165,16 +165,20 @@ export default function NavBar(){
                                         !isLogin 
                                         ? (
                                             <>
+                                                <div>
                                                 <button style={{border : '3px solid var(--bg-color-orange)', borderRadius : 10, padding : '7px 20px', backgroundColor : 'transparent', margin : '12px 0', color : 'var(--bg-color-orange-rouge)', fontWeight :'700',}}>
                                                     <Link href={'/souscription'} >
                                                         Inscrivez-vous
                                                     </Link>
                                                 </button>
-                                                <button style={{border : '3px solid var(--bg-color-orange)', borderRadius : 10, padding : '7px 20px', backgroundColor : 'transparent', margin : '12px 0', color : 'var(--bg-color-orange-rouge)', fontWeight :'700'}}>
+                                                </div>
+                                               <div className="mt-3">
+                                               <button style={{border : '3px solid var(--bg-color-orange)', borderRadius : 10, padding : '7px 20px', backgroundColor : 'transparent', margin : '12px 0', color : 'var(--bg-color-orange-rouge)', fontWeight :'700'}}>
                                                     <Link href={'/inscription'} >
                                                         Connectez-vous
                                                     </Link>
                                                 </button>
+                                               </div>
                                             </>
                                         )
                                         : (<div>
