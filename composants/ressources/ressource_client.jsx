@@ -36,6 +36,8 @@ export default function Ressources_client({data, params}){
             });
 
             return result
+        } else {
+            return data
         }
     }
 
