@@ -7,6 +7,8 @@ import { useGlobalContext } from "@/context/global_context";
 import { useRouter } from "next/navigation";
 import generated_ID from "@/app/ressource/id_gen";
 import moment from "moment/moment";
+import useFirebase from "@/firebase/firebase";
+import { getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 
 
 export default function New_Ressource(){
@@ -17,6 +19,8 @@ export default function New_Ressource(){
     const [categorie, setCategorie] = useState('')
     const [save, setSave] = useState(false)
     const [btn_name, setBtn_name] = useState('Publier')
+    const {Storages} = useFirebase()
+    const [img, setImg] = useState([])
 
     const { USERLOGININFO } = useGlobalContext()
     const Route = useRouter()
@@ -41,6 +45,19 @@ export default function New_Ressource(){
                     image_id: generated_ID(),
                     image_target: el
                 }
+                if(typeof window !== 'undefined'){
+                    console.log('je fonctionne 1')
+                    const reference = Storages
+                    const spaceRef = ref(reference, 'images/'+obj.name)
+                    uploadBytes(spaceRef, el).then((snapshot) => {
+                        console.log('je fonctionne 2')
+                        console.log('Uploaded a blob or file!');
+                        getDownloadURL(spaceRef, snapshot).then(url => {
+                            console.log('je fonctionne 3')
+                            setImg(el => [...el, url])
+                        })
+                    });
+                }
                 setBase64(element => [...element, obj]);
             })
         }
@@ -63,7 +80,7 @@ export default function New_Ressource(){
 
         if(response.ok) {
             const images = await response.json()
-            handlePublication(images)
+            handlePublication(img)
         }
         
     };

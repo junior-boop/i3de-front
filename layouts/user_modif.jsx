@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import { useGlobalContext } from "@/context/global_context";
+import { useRouter } from "next/navigation";
 
 export default function UserInfos(){
     const {LOGINCONTEXT, USERLOGININFO, handleReduceLogOut } = useGlobalContext()
@@ -9,17 +10,44 @@ export default function UserInfos(){
     const [userInfos, setUserInfos] = USERLOGININFO
 
     const [user, setUser] = useState({...userInfos})
-
+    const [pwConfirm, setPwConfirm] = useState()
+    const router = useRouter()
 
     useEffect(() => {
         setUser({...userInfos})
     }, [userInfos])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
        e.preventDefault()
 
-        console.dir(e.target)
+       let headersList = {
+        "Accept": "*/*"
+       }
+       
+       let bodyContent = new FormData();
+       for(let key in user) {
+            bodyContent.append(key, user[key]);
+       }
+       
+       let response = await fetch(`/api/inscription/${user._id}`, { 
+         method: "POST",
+         body: bodyContent,
+         headers: headersList
+       });
+
+       const responseJson = await response.json()
+
+        const {name, surname, mail, pw, tel, town, _id} = responseJson
+
+       if(response.ok) {
+        //  console.log({name, surname, mail, pw, tel, town, _id})
+        setUserInfos({name, surname, mail, pw, tel, town, _id})
+        router.refresh()
+        }
+
     }
+
+    
     return(
         <form className="mt-6" style={{ marginTop : 24}} onSubmit={handleSubmit} >
             <div className="w-full border border-slate-100 rounded-2xl p-6">
@@ -61,7 +89,7 @@ export default function UserInfos(){
                 <div className="mt-3">
                     <div className="text-base">Confirmer votre mot de passe</div>
                     <div className="w-full mt-2 text-xl font-bold border-b border-slate-200">
-                        <input className="w-full py-1 outline-none text-xl font-bold border-b border-slate-200" type="password" />
+                        <input className="w-full py-1 outline-none text-xl font-bold border-b border-slate-200" type="password" value={user.pw} onChange={({target}) => setPwConfirm(target.value)} />
                     </div>
                 </div>
             </div>

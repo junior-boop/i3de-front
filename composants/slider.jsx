@@ -5,7 +5,7 @@ import { QuillChevronLeft, QuillChevronRight, QuillLoadingSpin } from "./icons"
 export default function Slider({images}){
 
     const [position, setPosition] = useState(0)
-
+  
 
     const Dote = ({active}) => {
         let actived = active
@@ -25,12 +25,12 @@ export default function Slider({images}){
 
     const imgsrc = () => {
         if(images !== undefined && images[position] !== undefined){
-            return 'http://18.215.69.15:3000'+images[position]
+            return images[position]
         } else return '/assets/images/photo-19jpg'
     }
 
     
-
+    console.log(imgsrc())
     useEffect(() => {
         console.log(imgsrc())
         if(position > images?.length - 1) setPosition(0)

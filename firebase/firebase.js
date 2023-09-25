@@ -3,8 +3,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from 'firebase/database'
-// import { getStorage } from "firebase/storage";
-// import { getAuth } from 'firebase/auth'
+import { getStorage } from "firebase/storage";
+import { getAuth } from 'firebase/auth'
 
 import { useState, useEffect } from "react";
 
@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: "AIzaSyC5DcDMc6H2cgUkeqM4EPbjrlF_efZzels",
     authDomain: "i3de-ab3a5.firebaseapp.com",
     databaseURL: "https://i3de-ab3a5-default-rtdb.firebaseio.com",
@@ -25,7 +25,7 @@ const firebaseConfig = {
   };
 
 // Initialize Firebase
-export default function UseFirebase(){
+export default function useFirebase(){
 
   const [Database, setDatabase] = useState(null)
   const [Analytics, setAnalytics] = useState(null)
@@ -40,14 +40,14 @@ export default function UseFirebase(){
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
       const database = getDatabase(app)
-      // const storage = getStorage(app);
-      // const authentification = getAuth(app)
+      const storage = getStorage(app);
+      const authentification = getAuth(app)
 
 
         setAnalytics(analytics)
         setDatabase(database)
-        // setStorages(storage)
-        // setAuth(authentification)
+        setStorages(storage)
+        setAuth(authentification)
       
     }
   }, [])

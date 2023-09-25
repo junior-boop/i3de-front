@@ -2,7 +2,7 @@
 import { IS_LOGIN, IS_LOGOUT } from "@/reduce/constante";
 import { LoginReduce, initialState } from "@/reduce/globalReduce";
 import { createContext, useContext, useEffect, useReducer, useState } from "react";
-import UseFirebase from "@/firebase/firebase";
+import useFirebase from "@/firebase/firebase";
 
 const Global_context = createContext()
 
@@ -79,7 +79,8 @@ function Global_context_Provider({children}){
             handleReduceLogIn,
             handleReduceLogOut,
             LOGINCONTEXT,
-            USERLOGININFO
+            USERLOGININFO,
+            
         }}>
             {children}
         </Global_context.Provider>

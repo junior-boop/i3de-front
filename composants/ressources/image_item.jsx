@@ -17,6 +17,7 @@ export default function ImageItem({data, onClick, id}){
         
     //     return tb
     // }
+    console.log(data.value)
     
     
     useEffect(() => {
@@ -40,7 +41,7 @@ export default function ImageItem({data, onClick, id}){
     return(
         <div className="ImageItem" >
             <div className="col-12 p-0 image" style={{ cursor : 'pointer', position : 'relative', overflow : 'hidden'}}>
-                <img src={images.length > 0 ? `http://18.215.69.15:3000${images[0]}` : ''} width={'100%'}  alt = {'imagegroup'} />  
+                <img src={images.length > 0 ? `${images[0]}` : ''} width={'100%'}  alt = {'imagegroup'} />  
                 <div className="little_menu">
                     <Button icon={<BxsLike style = {{ width : 20, hieght : 20}} />}  />
                     {/* <Button icon={<MaterialSymbolsCloudDownloadRounded style = {{ width : 20, hieght : 20}} />}/> */}
