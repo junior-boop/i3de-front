@@ -67,8 +67,8 @@ export default function Slider({images}){
     }
 
     return(
-        <div className="h-[100%]">
-            <div className="relative overflow-hidden h-[100%]">
+        <div className="h-[100%]" >
+            <div className="relative overflow-hidden h-[100%]" style={{height : '100%', position : 'relative'}}>
                 {
                     CheckUndefine()
                 }
