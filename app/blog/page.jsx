@@ -7,7 +7,7 @@ import moment from "moment"
 
 
 const getData = async () => {
-    const response = await fetch('http://18.215.69.15:3000/api/articles', { next: { revalidate: 3600 }})
+    const response = await fetch('http://18.215.69.15:3000/api/articles', { cache : 'no-store' })
     const data = await response.json()
 
     if(!response.ok) throw new Error('il y a une errreur dans le transfert')
@@ -84,7 +84,7 @@ function Article({ titre, date, id, image}){
         <Link href={'/blog/'+id} className=" lg:block w-full p-2 hover:bg-gray-50 rounded-2xl transition-all duration-300 flex gap-2 flex-row-reverse">
             <div>
                 <div className="w-32 lg:w-full aspect-square lg:aspect-[4/3] overflow-hidden rounded-xl">
-                    <img src={`http://18.215.69.15:3000${image}`} alt="" className="w-full h-full object-cover object-center" />
+                    <img src={image} alt="" className="w-full h-full object-cover object-center" />
                 </div>
             </div>
             <div className="lg:mt-3 mb-4">
