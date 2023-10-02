@@ -24,8 +24,8 @@ export default async function ActualitesRoot(){
         const value = el.value
         console.log(value)
 
-        const { images, titre, createdAt } = value.Item
-        return <Article key={key} id = {el.key} image={images[0]} date={createdAt} titre={titre} />
+        const { google_images, titre, createdAt } = value.Item
+        return <Article key={key} id = {el.key} image={google_images} date={createdAt} titre={titre} />
     })
     return(
         <div>

@@ -81,7 +81,7 @@ export default function Apropos(){
                     </div>
                     <div className="flex flex-wrap gap-24  mb-14">
                         <div className="flex-1 aspect-[10/11] overflow-hidden rounded-2xl">
-                            <img src="/assets/images/portrait.webp" alt="" className="w-full h-full object-cover object-top" />
+                            <img src="/Cameroon-Arielle-768x1152.jpg" alt="" className="w-full h-full object-cover object-top" />
                         </div>
                         <div className="flex-1 py-11">
                             <div className="card_team_titre color-orange-rouge">Fondateur - Coordonnatrice du projet</div>
@@ -120,8 +120,8 @@ export default function Apropos(){
 
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                        <Resposable name = 'Dr TIOGUEM FRANCK' poste = 'Co-Fondateur' tel={'(+237) 655733765'} mail={'juniorseppo@gmail.com'} linkedin={'linkin.com'} />
-                        <Resposable name = "KONO FRANCOISE" poste = "Assistante projet" tel={'(+237) 693 801 828'} linkedin={'https://www.linkedin.com/in/fran%C3%A7oise-kono-828460196/'}/>
+                        <Resposable name = 'Dr TIOGUEM FRANCK' poste = 'Co-Fondateur' tel={'(+237) 655733765'} mail={'juniorseppo@gmail.com'} linkedin={'https://www.linkedin.com/in/arielle-kitio-tsamo/'} />
+                        <Resposable name = "KONO FRANCOISE" poste = "Assistante projet" tel={'(+237) 693 801 828'} linkedin={'https://www.linkedin.com/in/fran%C3%A7oise-kono-828460196/'} src={'/Françoise_KONO.jpg'}/>
                         <Resposable name = "WADO LEOLIN" poste = "Responsable technique"/>
                         <Resposable name = "BAVOUA RODOLPHE" poste= "Ingénieur en chef" />
                     </div>
@@ -131,11 +131,11 @@ export default function Apropos(){
     )
 }
 
-function Resposable({name, poste, linkedin, tel, mail}){
+function Resposable({name, poste, linkedin, tel, mail, src = "/assets/images/photo-19.jpg"}){
     return(
         <div className="w-full ">
             <div className="w-full aspect-square overflow-hidden rounded-xl border border-gray-200">
-                <img src="/assets/images/photo-19.jpg" alt="" className="object-cover w-full h-full object-center" />
+                <img src={src} alt="" className="object-cover w-full h-full object-center" />
             </div>
             <div className="px-3">
                 <div className="pt-4 text-2xl font-bold text-center">{name}</div>
