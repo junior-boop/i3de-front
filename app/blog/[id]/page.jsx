@@ -26,6 +26,7 @@ export default async function ActualiteIdRoot({params}) {
     const content = contenu
     
     const album = imagesAlbum.length > 0 && imagesAlbum.split(',')
+    console.log(imagesAlbum)
 
     return(
         <div>
@@ -64,7 +65,7 @@ export default async function ActualiteIdRoot({params}) {
                             </div>
                             <div className="w-full mx-auto grid grid-cols-4 gap-3">
                                 {
-                                    album.map((el, key) => <div className="w-full aspect-square overflow-hidden rounded-lg" key = {key}> <img src={'http://18.215.69.15:3000'+el} alt="" width={'100%'} className="aspect-square object-cover object-center" /> </div>)
+                                    album.map((el, key) => <div className="w-full aspect-square overflow-hidden rounded-lg" key = {key}> <img src={el} alt="" width={'100%'} className="aspect-square object-cover object-center" /> </div>)
                                 }
                             </div>
                         </>
