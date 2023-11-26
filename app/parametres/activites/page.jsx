@@ -1,7 +1,7 @@
 import Titre from "@/composants/titre";
 
 const getData = async () => {
-    const ressource = await fetch('http://18.215.69.15:3000/api/ressources/', { caches : 'no-store'})
+    const ressource = await fetch(process.env.URL + '/ressources', { caches : 'no-store'})
     const data = await ressource.json()
 
     if(ressource.ok) return data
