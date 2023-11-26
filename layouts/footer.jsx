@@ -85,22 +85,21 @@ function NewsLetter(){
     const handleSave = async () => {
         setSaving(true)
         setBtn_name("En cours d'envoie")
-        const newsLetter = {
-            mail : mail,
-        } 
+        
 
         let bodyContent = new FormData();
-            bodyContent.append("mail", newsLetter.mail);
+            bodyContent.append("mail", mail);
 
         const  headersList = {
             "Accept": "*/*"
            }
 
-        let response = await fetch("http://18.215.69.15:3000/api/newsletter", { 
+        let response = await fetch("/api/newsletter", { 
             method: "POST",
             body: bodyContent,
             headers: headersList
         });
+
 
         if(response.ok) {
             setBtn_name("Envoyé! Merci!")
@@ -109,7 +108,16 @@ function NewsLetter(){
                 setBtn_name("Envoyer")
                 setMail('')
             }, 2000)
+        } else {
+            setBtn_name("Probleme serveur!")
+            setTimeout(() => {
+                setSaving(false)
+                setBtn_name("Envoyer")
+                setMail('')
+            }, 2000)
         }
+
+
     }
     return (
         <div className="newsletter">

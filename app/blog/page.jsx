@@ -7,7 +7,7 @@ import moment from "moment"
 
 
 const getData = async () => {
-    const response = await fetch('http://18.215.69.15:3000/api/articles', { cache : 'no-store' })
+    const response = await fetch(process.env.URL + '/articles', { cache : 'no-store' })
     const data = await response.json()
 
     if(!response.ok) throw new Error('il y a une errreur dans le transfert')
@@ -21,10 +21,8 @@ export default async function ActualitesRoot(){
     const data = await getData()
 
     const liste = data.map((el, key) => {
-        const value = el.value
-        console.log(value)
 
-        const { google_images, titre, createdAt } = value.Item
+        const { images, titre, createdAt } = el
         return <Article key={key} id = {el.key} image={google_images} date={createdAt} titre={titre} />
     })
     return(

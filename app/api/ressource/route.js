@@ -1,8 +1,8 @@
 export async function GET(){
-    const response = await fetch('http://18.215.69.15:3000/api/ressources/')
+    const response = await fetch(process.env.URL + '/ressources')
     const data = await response.json()
 
     if(!response.ok)  throw new Error('il y a une erreur dans le serveur')
-        console.log(data);
+        console.log(data, 1);
     return new Response(JSON.stringify(data), { status : 201})
 }

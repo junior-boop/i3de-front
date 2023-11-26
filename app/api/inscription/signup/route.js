@@ -24,14 +24,15 @@ export const POST = async (request) => {
 
     
     try {
-        const reponse = await fetch("http://18.215.69.15:3000/api/inscription/signin", {
+        const reponse = await fetch(process.env.URL + "/inscription", {
             method : 'POST',
             body : bodyContent
         })
 
         if(reponse.ok) {
             const data = await reponse.json()
-            return new Response(JSON.stringify(data), { status: 201 })
+            console.log(data[0])
+            return new Response(JSON.stringify(data[0]), { status: 201 })
         }
     } catch (error) {
         console.log(error, 1)

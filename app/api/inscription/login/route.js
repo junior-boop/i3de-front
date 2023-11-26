@@ -10,18 +10,20 @@ export async function POST(request){
     
     try { 
         // const userText = `mail=${target[0].value}&pw=${target[1].value}`
-        const bodyContent = `mail=${mail}&pw=${pw}`
-        // let bodyContent = new FormData()
-        // bodyContent.append("mail", mail)
-        // bodyContent.append("pw", pw)
+       
+        let bodyContent = new FormData()
+        bodyContent.append("mail", mail)
+        bodyContent.append("pw", pw)
+
+        console.log(mail, pw)
         
 
         let headersList = {
             "Accept": "*/*",
-            "Content-Type": "application/x-www-form-urlencoded"
+            // "Content-Type": "application/x-www-form-urlencoded"
            }
 
-        const connexion = await fetch("http://18.215.69.15:3000/api/inscription/login", {
+        const connexion = await fetch(process.env.URL + "/connexion", {
             method : 'POST',
             body : bodyContent,
             headers : headersList

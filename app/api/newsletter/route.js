@@ -1,23 +1,27 @@
-import Mail from "@/models/mail";
-import { connectToDB } from "@/utils/database"
+export const POST = async (request) =>  {
+    const bodyParse = await request.formData()
 
-export const GET = async () => {
-    return new Response('je suis inscription')
-}
-
-export async function POST(request){
-    const { mail } = await request.json()
-    
     const NewsLettre = {
-        mail : mail
+        save : async () => {
+            const response = await fetch(process.env.URL + '/newsletter', {
+                method : 'POST',
+                body : bodyParse
+            })
+
+            if(response.ok) return 'OK'
+            return "Probleme"
+        }
     }
     
-    console.log(mail)
 
-    await NewsLettre.save()
     try { 
-        
-        return new Response(JSON.stringify('save'), { status: 201 })
+        const response = await NewsLettre.save()
+
+        if(response === 'OK') {
+            return new Response(JSON.stringify('save'), { status: 201 })
+        }
+
+        return new Response(JSON.stringify('Probleme'), { status: 501 })        
     } catch(error){
         return new Response('Il y a une erreur', { status: 500 })
     }

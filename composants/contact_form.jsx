@@ -1,8 +1,17 @@
 'use client'
 
+import { useState } from "react"
+import { QuillLoadingSpin } from "./icons"
+
 export default function Contact_form(){
+    const [btn_name, setBtn_name] = useState('Envoyer')
+    const [saving, setSaving] = useState(false)
+
     const handleSubmit = async (e) => {
+
         e.preventDefault() 
+        setSaving(true)
+        setBtn_name("En cours d'envoie")
 
         const target = e.target
 
@@ -28,10 +37,18 @@ export default function Contact_form(){
         })
         const data = await sender.json()
 
-
         if(sender.ok) {
-            console.log(data)
-            console.log('everything is ok')
+            setBtn_name("Envoyé! Merci!")
+            setTimeout(() => {
+                setSaving(false)
+                setBtn_name("Envoyer")
+            }, 2000)
+        } else {
+            setBtn_name("Probleme serveur!")
+            setTimeout(() => {
+                setSaving(false)
+                setBtn_name("Envoyer")
+            }, 2000)
         }
     }
 
@@ -75,8 +92,13 @@ export default function Contact_form(){
                         </div>
                     </div>
                     <div className="flex gap-4 items-center mt-4 relative h-[40px]">
-                        <button className="absolute left-[-20px] bottom-[-20px] lg:w-[105.5%] w-[112%] p-4 bg-[#c12227] font-bold text-white text-base outline-none" style={{ outline : 'none', border : "none"}}>
-                            Envoyer
+                        <button className="absolute left-[-20px] bottom-[-20px] lg:w-[105.5%] w-[112%] p-4 bg-[#c12227] font-bold text-white text-base outline-none flex gap-2 items-center justify-center" style={{ outline : 'none', border : "none"}}>
+                        {
+                            saving
+                            ? <QuillLoadingSpin className = "w-6 h-6 loader" />
+                            : null
+                        }
+                        {btn_name}
                         </button>
                     </div>
                 </form>

@@ -52,11 +52,10 @@ export default function Login(){
                 })
     
                 if(reponse.ok) {
-                    const {name, surname, mail, pw, tel, town, key} = await reponse.json()
+                    const {userId, user_name, user_subname, user_telephone, user_mail, user_town} = await reponse.json()
                 
-                    // const { name, surname, mail, pw, tel, town, like, share} = value
-                    setUserInfos({name, surname, mail, _id : key, pw, tel, town})
-                    handleReduceLogIn({name, surname, mail, _id : key})
+                    setUserInfos({name : user_name, surname : user_subname, mail : user_mail, _id : userId, pw : userId, tel : user_telephone, town : user_town})
+                    handleReduceLogIn({name : user_name, surname : user_subname, mail : user_mail, _id : userId})
                     setIsLogin(true)
                     router.replace('/ressource')
                 }
@@ -92,13 +91,12 @@ export default function Login(){
             })
 
             if(reponse.ok) {
-                const {key, value} = await reponse.json()
-                console.log(key, value);
-                const { name, surname, mail, pw, tel, town, like, share} = value
-                handleReduceLogIn({name, surname, mail, _id : key, pw})
+                const {userId, user_name, user_subname, user_telephone, user_mail, user_town} = await reponse.json()
+
+                handleReduceLogIn({name : user_name, surname : user_subname, mail : user_mail, _id : userId, pw : userId})
                 
                 setTimeout(() => {
-                    setUserInfos({name, surname, mail, _id : key, pw, tel, town, like, share})
+                    setUserInfos({name : user_name, surname : user_subname, mail : user_mail, _id : userId, pw : userId, tel : user_telephone, town : user_town})
                     setIsloaded(true)
                     setIsLogin(true)
                     router.replace('/ressource')

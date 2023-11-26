@@ -5,7 +5,6 @@ import { useState } from "react"
 import { useGlobalContext } from "@/context/global_context"
 
 export default function DetailsRessource({data}){
-    
     const router = useRouter()
 
     const [Data, setData] = useState({...data})
@@ -26,38 +25,40 @@ export default function DetailsRessource({data}){
         }
     }
 
+
+
     return(    
         <div className="card-ressource flex-1 p-4 flex flex-col justify-between rounded-2xl">
             <div>
                 <div className="text-3xl font-semibold">
                     {
-                    Data.titre === undefined 
+                    Data.ressources.titre === undefined 
                     ? (
                         <div className="h-7 w-[70%] mb-2 rounded-md bg-slate-200"></div>
                     ) 
-                    : Data.titre
+                    : Data.ressources.titre
                     }
                 </div>
                 <div className="font-semibold uppercase">{
-                    Data.titre === undefined 
+                    Data.ressources.titre === undefined 
                     ? (
                         <div className="h-5 w-40 mb-2 rounded-md bg-slate-100"></div>
                     ) 
-                    : Data.categorie
+                    : Data.ressources.categorie
                 }</div>
                 <div className="text-base italic">
                     {
-                    Data.titre === undefined 
+                    Data.ressources.titre === undefined 
                     ? (
                         <div className="h-5 w-[30%]  rounded-md bg-slate-100"></div>
                     ) 
-                    : `${Data.createdBy.name} ${Data.createdBy.surname}`
+                    : `${Data.createdBy.user_name} ${Data.createdBy.user_subname}`
                     }
                 </div>
                 <div className="mt-5 font-semibold mb-2">Description</div>
                 <div className="text-base descrition">
                 {
-                    Data.titre === undefined 
+                    Data.ressources.titre === undefined 
                     ? (
                         <>
                             <div className="h-5 w-[70%] mb-2  rounded-md bg-slate-100"></div>
@@ -71,7 +72,7 @@ export default function DetailsRessource({data}){
                             <div className="h-5 w-[90%] mb-2  rounded-md bg-slate-100"></div>
                         </>
                     ) 
-                    : Data.description
+                    : Data.ressources.descriptions
                     }
                 </div>
             </div>
@@ -79,7 +80,6 @@ export default function DetailsRessource({data}){
                 
                 <div className="flex items-center">
                     <Button onClick={handleLike} icon={<BxsLike style = {{ width : 24, hieght : 24}} />} number={Data.like !== undefined ? Data.like.length - 1 : '0'} />
-                    <Button icon={<MaterialSymbolsCloudDownloadRounded style = {{ width : 24, hieght : 24}} />}/>
                     <Button icon={<MdiShare style = {{ width : 24, hieght : 24}} />}/>
                 </div>
             </div>

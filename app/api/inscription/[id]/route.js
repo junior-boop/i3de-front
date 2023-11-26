@@ -6,12 +6,14 @@ export const GET = async (request) => {
     const key_value = key.at(-1)
 
     try {
-        const response = await fetch("http://18.215.69.15:3000/api/inscription/" + key_value, { cache : "no-store"})
+        const response = await fetch(process.env.URL + "/users/" + key_value, { cache : "no-store"})
         const responseJson = await response.json()
 
-        const {name, surname, mail, pw, tel, town, key} = JSON.parse(responseJson)
+        console.log(responseJson[0])
+
+        const {userId, user_name, user_subname, user_telephone, user_password, user_mail, user_town} = responseJson[0]
         if(response.ok) {
-            return new Response(JSON.stringify({name, surname, mail, pw, tel, town, _id : key}), { status : 201})
+            return new Response(JSON.stringify({name : user_name, surname : user_subname, mail : user_mail, pw : user_password, tel : user_telephone, town : user_town, _id : userId}), { status : 201})
         }
     } catch (error) {
         console.log(error)
@@ -34,7 +36,7 @@ export const POST = async (request) => {
             "Accept": "*/*",
         }
 
-        const response = await fetch("http://18.215.69.15:3000/api/inscription/" + key_value, { 
+        const response = await fetch(process.env.URL + "/inscription/" + key_value, { 
             method: "PUT",
             body: bodyContent,
             headers: headersList
@@ -46,8 +48,6 @@ export const POST = async (request) => {
             return new Response(JSON.stringify({name, surname, mail, pw, tel, town, _id : key}), { status : 201})
         }
         
-        // console.log(JSON.parse(responseJson))
-        // return new Response('je fonctionne', { status : 200})
     } catch (error) {
         console.log(error)
         return new Response('il y a une erreur', { status : 500})

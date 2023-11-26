@@ -13,7 +13,7 @@ export const POST =  async (request) => {
     const images = await request.formData()
     console.log(images)
 
-    let response = await fetch("http://18.215.69.15:3000/api/images", { 
+    let response = await fetch(process.env.URL + "/multiple_images", { 
         method: "POST",
         body: images,
         headers: headersList
@@ -27,5 +27,3 @@ export const POST =  async (request) => {
 
     }
 }
-
-// "http://18.215.69.15:3000/api/images"

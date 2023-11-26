@@ -1,12 +1,12 @@
 import Container from "@/composants/container"
-import { BxsLike, MaterialSymbolsCloudDownloadRounded, MdiShare, QuillArrowLeft, QuillChevronLeft, QuillChevronRight, QuillLoadingSpin } from "@/composants/icons"
+import {QuillArrowLeft} from "@/composants/icons"
 import Link from "next/link"
 import DetailsRessource from "@/composants/ressources/detailsRessource"
 import Slider from "@/composants/slider"
-import { data } from "autoprefixer"
 
 const getData = async (id) => {
-    const response = await fetch('http://18.215.69.15:3000/api/ressources/'+id)
+    const response = await fetch(process.env.URL + '/ressources/'+id, { cache : 'no-cache'})
+
     const data = await response.json()
     return data
 }
@@ -15,6 +15,8 @@ const getData = async (id) => {
 export default async  function HandleRessource({params}){
     const { id } = params
     const Data = await getData(id)
+    console.log(Data)
+    const Images = JSON.parse(Data.ressources.images)
     return(
         <div>
             <div style={{borderBottom : "1px solid #f1f1f1", marginBottom : 28}}>
@@ -33,7 +35,7 @@ export default async  function HandleRessource({params}){
                 </div>
                     <Container cName="flex gap-7">
                         <div className="card-ressource aspect-square mb-40 rounded-2xl">
-                            <Slider images={Data?.images} />
+                            <Slider images={Images} />
                         </div>
                         <DetailsRessource data = {Data} />
                     </Container>

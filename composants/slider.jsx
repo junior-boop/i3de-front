@@ -25,7 +25,7 @@ export default function Slider({images}){
 
     const imgsrc = () => {
         if(images !== undefined && images[position] !== undefined){
-            return images[position]
+            return "https://i3de-server.godigital.workers.dev/images" + images[position]
         } else return '/assets/images/photo-19jpg'
     }
 

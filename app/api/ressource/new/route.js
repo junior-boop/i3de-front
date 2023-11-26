@@ -12,11 +12,12 @@ export async function POST(request) {
 
        console.log(publication)
 
-    let response = await fetch("http://18.215.69.15:3000/api/ressources", { 
+    let response = await fetch(process.env.URL + "/ressources", { 
         method: "POST",
         body: JSON.stringify(publication),
         headers: headersList
     });
+
 
     if(response.ok) {
         console.log('je vais bien')
